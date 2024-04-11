@@ -8,13 +8,7 @@ type PriceDataType = {
   [key: string]: PriceType;
 };
 // Function to fetch item price data by item ID from an external API
-export const fetchPriceById = async ({
-  id,
-  isMounted,
-}: {
-  id: string;
-  isMounted: boolean;
-}) => {
+export const fetchPriceById = async (id: string, isMounted: boolean) => {
   try {
     // API endpoint URL for fetching item prices
     const url = "https://prices.runescape.wiki/api/v1/osrs/5m";
@@ -48,7 +42,7 @@ export const fetchPriceById = async ({
       return data[id]; // Return price data for the given item ID, if exists
     };
     // Filter price data by the provided item ID
-    const priceObj = filterDataById(data, id);
+    const priceObj = filterDataById(data.data, id);
     // Throw error if item ID is not found in the price data
     if (priceObj) {
       return priceObj;
@@ -57,6 +51,7 @@ export const fetchPriceById = async ({
     }
   } catch (error) {
     console.log(error); // Log any caught errors to the console
+    throw error;
   }
 };
 // Type definition for an object mapping item names to item IDs
@@ -64,13 +59,7 @@ type ItemDataType = {
   [itemName: string]: number;
 };
 // Function to fetch item name by item ID from an external API
-export const fetchNameById = async ({
-  id,
-  isMounted,
-}: {
-  id: number;
-  isMounted: boolean;
-}) => {
+export const fetchNameById = async (id: string, isMounted: boolean) => {
   try {
     // API endpoint URL for fetching item ID to name mapping
     const url =
@@ -102,12 +91,10 @@ export const fetchNameById = async ({
       itemData: ItemDataType,
     ): { [itemId: number]: string } => {
       const itemIdLookup: { [itemId: number]: string } = {};
-
       // Iterate over each item in itemData and populate the reverse lookup dictionary
       Object.entries(itemData).forEach(([itemName, itemId]) => {
         itemIdLookup[itemId] = itemName;
       });
-
       return itemIdLookup;
     };
     // Create a reverse lookup dictionary for item IDs mapped to item names
@@ -117,7 +104,7 @@ export const fetchNameById = async ({
       return itemIdLookup[itemId];
     };
     // Retrieve item name for the provided item ID
-    const itemName = getItemNameById(id);
+    const itemName = getItemNameById(Number(id));
     // Throw error if item name is not found for the provided item ID
     if (itemName !== undefined) {
       return itemName;
@@ -126,5 +113,6 @@ export const fetchNameById = async ({
     }
   } catch (error) {
     console.log(error); // Log any caught errors to the console
+    throw error;
   }
 };
