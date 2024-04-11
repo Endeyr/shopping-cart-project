@@ -1,15 +1,23 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Layout from "./components/layout";
 import { fetchNameById, fetchPriceById } from "./services/api";
 
 function App() {
+  const [price, setPrice] = useState(0);
+  const [name, setName] = useState("");
+
   useEffect(() => {
     let isMounted = true;
     const fetchData = async () => {
       const priceObj = await fetchPriceById("4151", isMounted);
-      console.log(priceObj);
-      const name = await fetchNameById("4151", true);
-      console.log(name);
+      if (priceObj?.avgHighPrice && priceObj?.avgLowPrice) {
+        const priceCalc = (priceObj?.avgHighPrice + priceObj?.avgLowPrice) / 2;
+        setPrice(priceCalc);
+      }
+      const nameFetch = await fetchNameById("4151", true);
+      if (nameFetch) {
+        setName(nameFetch);
+      }
     };
     fetchData();
     return () => {
@@ -21,6 +29,10 @@ function App() {
     <>
       <Layout>
         <div>Home</div>
+        <div>
+          <h2>{name}</h2>
+          <p>{price.toFixed(0)}gp</p>
+        </div>
       </Layout>
     </>
   );
