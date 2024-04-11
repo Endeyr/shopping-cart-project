@@ -586,20 +586,24 @@ body {
   --tw-contain-style:  ;
 }
 
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+.h-dvh {
+  height: 100dvh;
 }
 
-.hidden {
-  display: none;
+.h-\[80dvh\] {
+  height: 80dvh;
+}
+
+.h-\[10dvh\] {
+  height: 10dvh;
+}
+
+.h-\[0dvh\] {
+  height: 0dvh;
+}
+
+.h-\[20dvh\] {
+  height: 20dvh;
 }
 
 @keyframes enter {
