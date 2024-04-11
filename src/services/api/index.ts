@@ -48,10 +48,10 @@ export const fetchPriceById = async ({
       return data[id]; // Return price data for the given item ID, if exists
     };
     // Filter price data by the provided item ID
-    const price = filterDataById(data, id);
+    const priceObj = filterDataById(data, id);
     // Throw error if item ID is not found in the price data
-    if (price) {
-      return price;
+    if (priceObj) {
+      return priceObj;
     } else {
       throw new Error("Id not found");
     }
