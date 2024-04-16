@@ -1,4 +1,4 @@
-import { fetchNameById, fetchPriceById } from "@/services/api/index";
+import { fetchIdByName, fetchPriceById } from "@/services/api/index";
 import { beforeEach, describe, expect, it } from "vitest";
 // Possible improvements could be adding test for each failed status, edge cases, api being down, ect
 describe("testing api", () => {
@@ -34,7 +34,7 @@ describe("testing api", () => {
     );
   });
 
-  it("calls osrs wiki and returns name by id", async () => {
+  it("calls osrs wiki and returns id by name", async () => {
     fetchMock.mockResponseOnce(
       JSON.stringify({
         "Abyssal whip": 4151,
@@ -42,9 +42,9 @@ describe("testing api", () => {
     );
 
     // assert on the response
-    const response = await fetchNameById("4151", true);
+    const response = await fetchIdByName("Abyssal Whip", true);
 
-    expect(response).toEqual("Abyssal whip");
+    expect(response).toEqual(4151);
 
     // assert on the times called and arguments given to fetch
     expect(fetchMock.requests().length).toEqual(1);
