@@ -14,17 +14,30 @@ Welcome to the Shopping Cart App! This is a web application built with React, Ty
 
 ## Usage
 
+Users will be able to search for weapons and armor from the popular mmo Old School Runescape. Users will be able to add products to their wish list or cart. Users will be able to navigate between pages. 
+
 ## Technologies Used
 
 - React: Javascript library for building ui.
 - TypeScript: Typed Javascript for code quality and dev experience.
 - Vite: Fast and lightweight build tool.
 - Tailwind CSS: Utility-first CSS framework.
-- ShadCn
+- ShadCn: Collection of re-usable components.
 - React Router: Declarative routing library for React applications.
-- Vitest
+- Vitest: Testing framework powered by Vite.
+- Vitest-Fetch-Mock: Easily mock fetch calls and return responses.
 
 ## Folder Structure
+
+- components - main ui building blocks
+- lib - utility functions
+- routes - navigation using react router
+- services - api calls
+- tests - test coverage
+- types - typescript type safety
+- error-page.tsx - error catch for react router
+- App.tsx - main page
+- output.css - tailwindcss output file
 
 ## Contributing
 
