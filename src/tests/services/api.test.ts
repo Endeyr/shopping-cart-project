@@ -1,6 +1,6 @@
 import { fetchNameById, fetchPriceById } from "@/services/api/index";
 import { beforeEach, describe, expect, it } from "vitest";
-
+// Possible improvements could be adding test for each failed status, edge cases, api being down, ect
 describe("testing api", () => {
   beforeEach(() => {
     fetchMock.resetMocks();
