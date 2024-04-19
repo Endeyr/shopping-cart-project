@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Layout from "./components/layout";
+import { ThemeProvider } from "./providers/theme-provider";
 import { fetchIdByName, fetchPriceById } from "./services/api";
 
 function App() {
@@ -47,7 +48,7 @@ function App() {
     return <p className="loading">Loading...</p>;
   }
   return (
-    <>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Layout>
         <div>Home</div>
         <form id="searchForm" onSubmit={handleSubmit}>
@@ -76,7 +77,7 @@ function App() {
           </div>
         )}
       </Layout>
-    </>
+    </ThemeProvider>
   );
 }
 

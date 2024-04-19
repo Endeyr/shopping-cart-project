@@ -11,6 +11,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.0.6",
+    "@radix-ui/react-slot": "^1.0.2",
     "@types/localforage": "^0.0.34",
     "@types/match-sorter": "^6.0.0",
     "@types/react-router-dom": "^5.3.3",
