@@ -14,7 +14,7 @@ Welcome to the Shopping Cart App! This is a web application built with React, Ty
 
 ## Usage
 
-Users will be able to search for weapons and armor from the popular mmo Old School Runescape. Users will be able to add products to their wish list or cart. Users will be able to navigate between pages. 
+Users will be able to search for weapons and armor from the popular mmo Old School Runescape. Users will be able to add products to their wish list or cart. Users will be able to navigate between pages.
 
 ## Technologies Used
 
@@ -26,6 +26,32 @@ Users will be able to search for weapons and armor from the popular mmo Old Scho
 - React Router: Declarative routing library for React applications.
 - Vitest: Testing framework powered by Vite.
 - Vitest-Fetch-Mock: Easily mock fetch calls and return responses.
+
+## Setup
+
+### Install
+
+```
+git clone https://github.com/Endeyr/shopping-cart-project
+```
+
+```
+cd shopping-cart-project
+```
+
+```
+npm install
+```
+
+```
+npm run dev
+```
+
+### Tailwind CLI build process
+
+```
+npx tailwindcss -i ./src/index.css -o ./src/output.css --watch
+```
 
 ## Folder Structure
 
