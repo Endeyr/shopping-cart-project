@@ -1,4 +1,6 @@
+import Container from "@/components/container";
+
 const Services = () => {
-  return <div>Services</div>;
+  return <Container>Services</Container>;
 };
 export default Services;

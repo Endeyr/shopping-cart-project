@@ -7,15 +7,10 @@ import Testimonials from "../testimonials";
 const Home = () => {
   return (
     <>
-      {/* Hero Section */}
       <Hero />
-      {/* Services */}
       <Services />
-      {/* Identity */}
       <Identity />
-      {/* Testimonials */}
       <Testimonials />
-      {/* Call to Action */}
       <CallToAction />
     </>
   );

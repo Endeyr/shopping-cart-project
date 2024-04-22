@@ -1,4 +1,6 @@
+import Container from "@/components/container";
+
 const Testimonials = () => {
-  return <div>Testimonials</div>;
+  return <Container>Testimonials</Container>;
 };
 export default Testimonials;

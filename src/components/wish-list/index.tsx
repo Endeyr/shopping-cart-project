@@ -1,4 +1,6 @@
+import Container from "@/components/container";
+
 const Checkout = () => {
-  return <div>Checkout</div>;
+  return <Container>Checkout</Container>;
 };
 export default Checkout;

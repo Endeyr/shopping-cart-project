@@ -1,4 +1,5 @@
+import Container from "@/components/container";
 const Product = () => {
-  return <div>Product</div>;
+  return <Container>Product</Container>;
 };
 export default Product;

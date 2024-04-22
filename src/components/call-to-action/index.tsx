@@ -1,4 +1,5 @@
+import Container from "@/components/container";
 const CallToAction = () => {
-  return <div>CallToAction</div>;
+  return <Container>CallToAction</Container>;
 };
 export default CallToAction;
