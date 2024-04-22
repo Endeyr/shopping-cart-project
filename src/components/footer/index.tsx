@@ -1,5 +1,5 @@
 import { GiLetterBomb, GiPhone, GiPin } from "react-icons/gi";
-
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer className="w-full sm:grid sm:grid-cols-4 sm:justify-between sm:items-center gap-3 p-[50px] hidden">
@@ -12,24 +12,24 @@ const Footer = () => {
         <h2 className="font-bold capitalize text-xl">Browse</h2>
         <ul className="flex flex-col" role="list">
           <li>
-            <a href="/" className="w-full">
+            <Link to={"/"} className="w-full">
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/services" className="w-full">
+            <Link to={"/services"} className="w-full">
               Services
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/about" className="w-full">
+            <Link to={"/about"} className="w-full">
               About
-            </a>
+            </Link>
           </li>
           <li>
-            <a href="/contact" className="w-full">
+            <Link to={"/contact"} className="w-full">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
