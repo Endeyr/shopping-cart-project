@@ -22,6 +22,8 @@ Users will be able to search for weapons and armor from the popular mmo Old Scho
 - TypeScript: Typed Javascript for code quality and dev experience.
 - Vite: Fast and lightweight build tool.
 - Tailwind CSS: Utility-first CSS framework.
+- TwMerge: Utility function to efficiently merge Tailwind CSS classes.
+- ReactIcons: Popular icons for React projects, utilizing ES6 imports.
 - ShadCn: Collection of re-usable components.
 - React Router: Declarative routing library for React applications.
 - Vitest: Testing framework powered by Vite.
