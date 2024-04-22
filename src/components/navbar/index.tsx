@@ -1,5 +1,6 @@
 import { fetchIdByName, fetchPriceById } from "@/services/api";
 import { useEffect, useState } from "react";
+import { ModeToggle } from "../theme-toggle";
 import SearchBar from "./search-bar";
 
 const Navbar = () => {
@@ -34,23 +35,26 @@ const Navbar = () => {
   }, [itemName]);
 
   if (isLoading) {
-    return <div>Loading ...</div>;
+    return <div>Loading ...{price}</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="mx-2 p-4">Error: {error.message}</div>;
   }
 
   return (
-    <>
-      <div>Navbar</div>
+    <div className="grid grid-cols-4 items-center p-4 border w-full">
+      <div className="w-full">Home</div>
       <SearchBar setItemName={setItemName} />
-      {itemName && (
-        <div>
+      <div className="flex w-full justify-end">
+        <ModeToggle />
+      </div>
+      {/* {itemName && (
+        <div className="flex w-full justify-end">
           {itemName} - {Number(price.toFixed(0)).toLocaleString("en-US")}gp
         </div>
-      )}
-    </>
+      )} */}
+    </div>
   );
 };
 export default Navbar;

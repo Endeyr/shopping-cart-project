@@ -1,4 +1,7 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { IoSearch } from "react-icons/io5";
 
 const SearchBar = ({
   setItemName,
@@ -18,19 +21,20 @@ const SearchBar = ({
     setUserInput("");
   };
   return (
-    <form id="searchForm" onSubmit={handleSubmit}>
-      <label htmlFor="userInput">
-        Name:
-        <input
-          className="dark:text-black"
+    <form id="searchForm" className="col-span-2" onSubmit={handleSubmit}>
+      <div className="flex w-full items-center space-x-2">
+        <Input
+          type="text"
           id="userInput"
           name="userInput"
-          type="text"
+          placeholder="Search"
           value={userInput}
           onChange={handleChange}
         />
-      </label>
-      <button>Search</button>
+        <Button type="submit">
+          <IoSearch />
+        </Button>
+      </div>
     </form>
   );
 };
