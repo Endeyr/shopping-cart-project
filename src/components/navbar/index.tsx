@@ -43,18 +43,20 @@ const Navbar = () => {
   }
 
   return (
-    <div className="grid grid-cols-4 items-center p-4 border w-full">
-      <div className="w-full">Home</div>
-      <SearchBar setItemName={setItemName} />
-      <div className="flex w-full justify-end">
-        <ModeToggle />
-      </div>
-      {/* {itemName && (
+    <header className="sticky top-0 z-50 w-full border-b hidden md:block">
+      <div className="grid grid-cols-4 items-center p-4 h-16">
+        <div className="w-full">Logo</div>
+        <SearchBar setItemName={setItemName} />
+        <div className="flex w-full justify-end">
+          <ModeToggle />
+        </div>
+        {/* {itemName && (
         <div className="flex w-full justify-end">
           {itemName} - {Number(price.toFixed(0)).toLocaleString("en-US")}gp
         </div>
       )} */}
-    </div>
+      </div>
+    </header>
   );
 };
 export default Navbar;
