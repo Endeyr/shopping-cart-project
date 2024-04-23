@@ -23,6 +23,9 @@ module.exports = {
         os_body: ["IBM Plex Sans"],
       },
       colors: {
+        // custom
+        os_header_lite: "hsl(36, 28%, 62%)",
+        os_header_dark: "hsl(25, 14%, 17%)",
         // shadcn color theme
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

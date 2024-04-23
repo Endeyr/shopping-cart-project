@@ -43,7 +43,7 @@ const Navbar = () => {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b hidden md:block">
+    <header className="sticky top-0 z-50 w-full bg-os_header_lite dark:bg-os_header_dark border-b hidden md:block">
       <div className="grid grid-cols-4 items-center p-4 h-16">
         <div className="w-full">Logo</div>
         <SearchBar setItemName={setItemName} />
