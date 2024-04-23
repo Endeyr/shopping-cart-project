@@ -13,7 +13,7 @@ const Navbar = () => {
     let isMounted = true;
     const fetchData = async () => {
       try {
-        const idFetch = await fetchIdByName(itemName, true);
+        const idFetch = await fetchIdByName(itemName, isMounted);
         const priceObj = await fetchPriceById(idFetch, isMounted);
         // check if prices are undefined or null
         const avgHighPrice = priceObj?.avgHighPrice ?? 0;
