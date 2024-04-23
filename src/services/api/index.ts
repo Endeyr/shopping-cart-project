@@ -87,3 +87,31 @@ export const fetchIdByName = async (name: string, isMounted: boolean) => {
     throw new Error("Item with name not found.");
   }
 };
+// Function to fetch all items from an external API
+export const fetchAllItems = async (isMounted: boolean) => {
+  const url = "https://prices.runescape.wiki/api/v1/osrs/mapping";
+  const response = await fetch(url);
+  if (!isMounted) return;
+  if (!response.ok) {
+    switch (response.status) {
+      case 400:
+        throw new Error("Bad request: Network response 400");
+      case 401:
+        throw new Error("Unauthorized: Network response 401");
+      case 404:
+        throw new Error("Not found: Network response 404");
+      case 500:
+        throw new Error("Internal server error: Network response 500");
+      default:
+        throw new Error(
+          `Unexpected error: Network response ${response.status}`,
+        );
+    }
+  }
+  const data = await response.json();
+  if (data !== undefined) {
+    return data;
+  } else {
+    throw new Error("Unable to retrieve data");
+  }
+};
