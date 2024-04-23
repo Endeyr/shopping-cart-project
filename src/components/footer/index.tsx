@@ -2,7 +2,7 @@ import { GiLetterBomb, GiPhone, GiPin } from "react-icons/gi";
 import { Link } from "react-router-dom";
 const Footer = () => {
   return (
-    <footer className="w-full sm:grid sm:grid-cols-4 sm:justify-between sm:items-center gap-3 p-[50px] hidden">
+    <footer className="w-full sm:grid sm:grid-cols-4 sm:justify-evenly sm:items-center gap-24 p-[50px] hidden">
       <div className="flex flex-col justify-start items-start gap-2 w-full h-full">
         <h2 className="font-bold capitalize text-xl">Business Name</h2>
         <p className="w-1/2">Catchphrase</p>
