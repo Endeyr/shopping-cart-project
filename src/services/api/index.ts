@@ -87,6 +87,12 @@ export const fetchIdByName = async (name: string, isMounted: boolean) => {
     throw new Error("Item with name not found.");
   }
 };
+type ItemType = {
+  examine: string;
+  id: number;
+  icon: string;
+  name: string;
+};
 // Function to fetch all items from an external API
 export const fetchAllItems = async (isMounted: boolean) => {
   const url = "https://prices.runescape.wiki/api/v1/osrs/mapping";
@@ -110,7 +116,13 @@ export const fetchAllItems = async (isMounted: boolean) => {
   }
   const data = await response.json();
   if (data !== undefined) {
-    return data;
+    const itemData: ItemType[] = data.map((data: ItemType) => ({
+      examine: data.examine,
+      id: data.id,
+      icon: data.icon,
+      name: data.name,
+    }));
+    return itemData;
   } else {
     throw new Error("Unable to retrieve data");
   }
