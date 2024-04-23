@@ -1,5 +1,5 @@
 import Container from "@/components/container";
-const Product = () => {
+const ProductPage = () => {
   return <Container>Product</Container>;
 };
-export default Product;
+export default ProductPage;

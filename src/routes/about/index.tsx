@@ -1,6 +1,6 @@
 import Container from "@/components/container";
 
-const About = () => {
-  return <Container>About</Container>;
+const AboutPage = () => {
+  return <Container>AboutPage</Container>;
 };
-export default About;
+export default AboutPage;

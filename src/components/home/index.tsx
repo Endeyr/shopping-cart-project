@@ -1,7 +1,7 @@
 import CallToAction from "../call-to-action";
 import Hero from "../hero";
 import Identity from "../identity";
-import Services from "../../routes/services";
+import Services from "../services";
 import Testimonials from "../testimonials";
 
 const Home = () => {

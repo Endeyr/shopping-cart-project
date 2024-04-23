@@ -1,6 +1,6 @@
 import Container from "@/components/container";
 
-const WishList = () => {
+const WishListPage = () => {
   return <Container>WishList</Container>;
 };
-export default WishList;
+export default WishListPage;

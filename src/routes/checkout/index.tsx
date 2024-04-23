@@ -1,5 +1,5 @@
 import Container from "@/components/container";
-const Checkout = () => {
-  return <Container>Checkout</Container>;
+const CheckoutPage = () => {
+  return <Container>CheckoutPage</Container>;
 };
-export default Checkout;
+export default CheckoutPage;

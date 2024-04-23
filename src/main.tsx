@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
+import Services from "./components/services";
 import ErrorPage from "./error-page";
 import "./index.css";
 import About from "./routes/about";
@@ -11,7 +12,6 @@ import Contact from "./routes/contact";
 import Product from "./routes/product";
 import Products from "./routes/products";
 import Root from "./routes/root";
-import Services from "./routes/services";
 import WishList from "./routes/wish-list";
 
 const router = createBrowserRouter([

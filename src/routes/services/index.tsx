@@ -1,6 +1,4 @@
-import Container from "@/components/container";
-
-const Services = () => {
-  return <Container>Services</Container>;
+const ServicesPage = () => {
+  return <div>ServicesPage</div>;
 };
-export default Services;
+export default ServicesPage;

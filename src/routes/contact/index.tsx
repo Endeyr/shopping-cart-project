@@ -1,6 +1,6 @@
 import Container from "@/components/container";
 
-const Contact = () => {
+const ContactPage = () => {
   return <Container>Contact Us</Container>;
 };
-export default Contact;
+export default ContactPage;
