@@ -1,3 +1,4 @@
+import { getWikiFileURL } from "./../../helpers/getWikiFileUrl";
 // Type definitions for item price data
 type PriceType = {
   avgHighPrice: number | null;
@@ -119,7 +120,7 @@ export const fetchAllItems = async (isMounted: boolean) => {
     const itemData: ItemType[] = data.map((data: ItemType) => ({
       examine: data.examine,
       id: data.id,
-      icon: data.icon,
+      iconSrc: getWikiFileURL(data.icon),
       name: data.name,
     }));
     return itemData;
