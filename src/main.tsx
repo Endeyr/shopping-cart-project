@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Services from "./components/services";
 import ErrorPage from "./error-page";
 import "./index.css";
 import About from "./routes/about";
@@ -47,10 +46,6 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
-      },
-      {
-        path: "services",
-        element: <Services />,
       },
       {
         path: "wish-list",
