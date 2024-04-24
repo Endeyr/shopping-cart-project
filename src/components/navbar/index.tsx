@@ -1,6 +1,8 @@
 import { fetchIdByName, fetchPriceById } from "@/services/api";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { ModeToggle } from "../theme-toggle";
+import NavLinks from "./nav-links";
 import SearchBar from "./search-bar";
 
 const Navbar = () => {
@@ -44,11 +46,14 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full bg-os_header_lite dark:bg-os_header_dark border-b hidden md:block">
-      <div className="grid grid-cols-4 items-center p-4 h-16">
-        <div className="w-full">Logo</div>
+      <div className="grid grid-cols-5 items-center p-4 h-16">
+        <Link to={"/"} className="w-full">
+          Logo
+        </Link>
         <SearchBar setItemName={setItemName} />
-        <div className="flex w-full justify-end">
+        <div className="flex items-center space-x-1 w-full justify-between mx-4 gap-4 col-span-2">
           <ModeToggle />
+          <NavLinks />
         </div>
         {/* {itemName && (
         <div className="flex w-full justify-end">
