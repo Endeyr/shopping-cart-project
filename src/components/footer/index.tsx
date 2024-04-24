@@ -17,11 +17,6 @@ const Footer = () => {
             </Link>
           </li>
           <li>
-            <Link to={"/services"} className="w-full">
-              Services
-            </Link>
-          </li>
-          <li>
             <Link to={"/about"} className="w-full">
               About
             </Link>
@@ -29,6 +24,16 @@ const Footer = () => {
           <li>
             <Link to={"/contact"} className="w-full">
               Contact
+            </Link>
+          </li>
+          <li>
+            <Link to={"/wish-list"} className="w-full">
+              Wish List
+            </Link>
+          </li>
+          <li>
+            <Link to={"/cart"} className="w-full">
+              Cart
             </Link>
           </li>
         </ul>
