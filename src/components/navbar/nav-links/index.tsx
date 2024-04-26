@@ -1,4 +1,4 @@
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { GiShoppingCart } from "react-icons/gi";
 import { Link } from "react-router-dom";
 
