@@ -41,22 +41,24 @@ const Navbar = () => {
   }
 
   if (error) {
-    return <div className="mx-2 p-4">Error: {error.message}</div>;
+    return <div className="p-4 mx-2">Error: {error.message}</div>;
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-os_header_lite dark:bg-os_header_dark border-b hidden md:block">
-      <div className="grid grid-cols-5 items-center p-4 h-16">
+    <header className="sticky top-0 z-50 hidden w-full border-b bg-os_header_lite dark:bg-os_header_dark md:block">
+      <div className="grid items-center h-16 grid-cols-5 p-4">
         <Link to={"/"} className="w-full">
           Logo
         </Link>
         <SearchBar setItemName={setItemName} />
-        <div className="flex items-center space-x-1 w-full justify-between mx-4 gap-4 col-span-2">
+        <ul className="flex items-center justify-between w-full col-span-2 gap-4 mx-4 space-x-1">
+          <li>
           <ModeToggle />
+          </li>
           <NavLinks />
-        </div>
+        </ul>
         {/* {itemName && (
-        <div className="flex w-full justify-end">
+        <div className="flex justify-end w-full">
           {itemName} - {Number(price.toFixed(0)).toLocaleString("en-US")}gp
         </div>
       )} */}
