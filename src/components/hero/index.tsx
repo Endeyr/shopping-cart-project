@@ -3,11 +3,11 @@ import Container from "@/components/container";
 const Hero = () => {
   return (
     <Container
-      className="bg-no-repeat bg-cover bg-center justify-center items-center"
+      className="items-center justify-center bg-center bg-no-repeat bg-cover"
       id="hero-section"
     >
-      <div className="xl:w-1/2 w-full flex flex-col justify-between gap-4 items-start">
-        <h2 className="font-bold outline-black capitalize text-4xl text-center w-full my-4">
+      <div className="flex flex-col items-start justify-between w-full gap-4 xl:w-1/2">
+        <h2 className="w-full my-4 text-4xl font-bold text-center capitalize outline-black">
           Welcome to my site
         </h2>
         <p>Some words</p>

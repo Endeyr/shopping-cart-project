@@ -40,14 +40,14 @@ export const ContentCard = ({
   return (
     <CardContainer>
       {header && (
-        <div className="rounded-t-xl border-b bg-gray-100 px-4 py-3 sm:px-5 md:py-4">
+        <div className="px-4 py-3 bg-gray-100 border-b rounded-t-xl sm:px-5 md:py-4">
           <p className="mt-1 text-sm text-gray-500">{header}</p>
         </div>
       )}
-      <div className="flex flex-col xl:h-72 p-4 md:p-5">
+      <div className="flex flex-col p-4 xl:h-72 md:p-5">
         {title && <h3 className="text-lg font-bold text-gray-800">{title}</h3>}
         {subtitle && (
-          <p className="mt-1 text-xs font-medium uppercase text-gray-500">
+          <p className="mt-1 text-xs font-medium text-gray-500 uppercase">
             {subtitle}
           </p>
         )}
@@ -63,7 +63,7 @@ export const ContentCard = ({
         )}
       </div>
       {footer && (
-        <div className="rounded-b-xl border-t bg-gray-100 px-4 py-3 sm:px-5 md:py-4">
+        <div className="px-4 py-3 bg-gray-100 border-t rounded-b-xl sm:px-5 md:py-4">
           <p className="mt-1 text-sm text-gray-500">{footer}</p>
         </div>
       )}

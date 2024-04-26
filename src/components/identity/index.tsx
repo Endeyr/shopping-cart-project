@@ -3,7 +3,7 @@ import Container from "@/components/container";
 const Identity = () => {
   return (
     <Container>
-      <div className="grid grid-col-3 w-full items-center justify-center">
+      <div className="grid items-center justify-center w-full grid-col-3">
         {/* TODO placeholder image */}
         <img
           className="hidden sm:block w-[100px] h-[100px]"
@@ -13,8 +13,8 @@ const Identity = () => {
           alt="abyssal whip"
           loading="lazy"
         />
-        <div className="col-span-2 col-start-2 flex flex-col justify-start items-center gap-2">
-          <h2 className="font-bold capitalize text-lg text-center w-full my-2">
+        <div className="flex flex-col items-center justify-start col-span-2 col-start-2 gap-2">
+          <h2 className="w-full my-2 text-lg font-bold text-center capitalize">
             Who are we?
           </h2>
           <p className="px-4">Some words</p>

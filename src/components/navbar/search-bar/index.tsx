@@ -22,7 +22,7 @@ const SearchBar = ({
   };
   return (
     <form id="searchForm" className="col-span-2" onSubmit={handleSubmit}>
-      <div className="flex w-full items-center space-x-2">
+      <div className="flex items-center w-full space-x-2">
         <Input
           type="text"
           id="userInput"

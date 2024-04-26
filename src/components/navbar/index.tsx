@@ -53,7 +53,7 @@ const Navbar = () => {
         <SearchBar setItemName={setItemName} />
         <ul className="flex items-center justify-between w-full col-span-2 gap-4 mx-4 space-x-1">
           <li>
-          <ModeToggle />
+            <ModeToggle />
           </li>
           <NavLinks />
         </ul>

@@ -2,7 +2,7 @@ import Container from "@/components/container";
 const CallToAction = () => {
   return (
     <Container className="flex-col">
-      <h2 className="font-bold outline-black capitalize text-4xl text-center w-full">
+      <h2 className="w-full text-4xl font-bold text-center capitalize outline-black">
         Buy from us
       </h2>
       <p>paragraphs</p>
