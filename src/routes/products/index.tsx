@@ -59,12 +59,11 @@ const ProductsPage = () => {
   const paginatedItems = items.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
-    <Container className="grid grid-cols-5">
-      {/* Sidebar */}
-      <div className="w-full col-span-1">Sidebar</div>
-      {/* Main */}
+    <Container className="grid grid-cols-4">
       <div className="flex flex-col w-full h-full col-span-4 gap-2">
-        <h2>Products</h2>
+        <h2 className="flex items-center justify-center w-full text-xl font-bold">
+          Products
+        </h2>
         {itemsLoading ? (
           <div className="flex items-center justify-center h-48">
             <div className="w-10 h-10 border-t-2 border-b-2 rounded-full border-primary animate-spin"></div>
