@@ -106,7 +106,7 @@ export const fetchAllItems = async (isMounted: boolean) => {
     const itemData: ItemType[] = data.map((data: ItemType) => ({
       examine: data.examine,
       id: data.id,
-      iconSrc: getWikiFileURL(data.icon),
+      icon: getWikiFileURL(data.icon),
       name: data.name,
     }));
     return itemData;
