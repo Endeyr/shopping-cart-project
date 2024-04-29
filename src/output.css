@@ -884,6 +884,14 @@ body {
   height: 175px;
 }
 
+.h-\[20dvh\] {
+  height: 20dvh;
+}
+
+.h-\[25dvh\] {
+  height: 25dvh;
+}
+
 .min-h-\[100dvh\] {
   min-height: 100dvh;
 }
@@ -906,6 +914,10 @@ body {
 
 .min-h-\[30dvh\] {
   min-height: 30dvh;
+}
+
+.min-h-\[25dvh\] {
+  min-height: 25dvh;
 }
 
 .w-1\/2 {
@@ -1234,6 +1246,16 @@ body {
 
 .fill-current {
   fill: currentColor;
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.object-scale-down {
+  -o-object-fit: scale-down;
+     object-fit: scale-down;
 }
 
 .p-1 {

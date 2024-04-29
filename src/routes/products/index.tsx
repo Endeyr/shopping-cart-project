@@ -75,8 +75,31 @@ const ProductsPage = () => {
           <>
             <div className="grid w-full grid-cols-1 col-span-4 md:grid-cols-2 lg:grid-cols-4">
               {paginatedItems.map((item) => (
-                <div key={item.id} className="border min-h-[20dvh]">
-                  <Link to={`/product/${item.id}`}>{item.name}</Link>
+                <div key={item.id} className="border min-h-[25dvh] p-2">
+                  <Link
+                    to={`/product/${item.id}`}
+                    className="flex flex-col justify-between w-full h-full"
+                  >
+                    <div>
+                      <span className="font-bold">Name: </span>
+                      {item.name}
+                    </div>
+                    <div className="flex items-center justify-center w-full">
+                      <img
+                        src={item.icon}
+                        alt={item.name}
+                        srcSet={`${item.icon}?7263b 100w`}
+                        width={25}
+                        height={25}
+                        className="object-scale-down"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p>
+                      <span className="font-bold">Description: </span>
+                      {item.examine}
+                    </p>
+                  </Link>
                 </div>
               ))}
             </div>
