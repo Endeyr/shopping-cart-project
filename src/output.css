@@ -847,6 +847,14 @@ body {
   height: 200px;
 }
 
+.h-\[500px\] {
+  height: 500px;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
 .min-h-\[100dvh\] {
   min-height: 100dvh;
 }
