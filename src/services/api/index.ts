@@ -1,13 +1,5 @@
+import { ItemType, PriceDataType, PriceType } from "@/types/type";
 import { getWikiFileURL } from "./../../helpers/getWikiFileUrl";
-// Type definitions for item price data
-type PriceType = {
-  avgHighPrice: number | null;
-  avgLowPrice: number | null;
-};
-// Type definition for an object mapping item IDs to PriceType
-type PriceDataType = {
-  [key: string]: PriceType;
-};
 // Function to fetch item price data by item ID from an external API
 export const fetchPriceById = async (id: string, isMounted: boolean) => {
   // API endpoint URL for fetching item prices
@@ -87,12 +79,6 @@ export const fetchIdByName = async (name: string, isMounted: boolean) => {
   } else {
     throw new Error("Item with name not found.");
   }
-};
-type ItemType = {
-  examine: string;
-  id: number;
-  icon: string;
-  name: string;
 };
 // Function to fetch all items from an external API
 export const fetchAllItems = async (isMounted: boolean) => {

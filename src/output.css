@@ -739,6 +739,11 @@ body {
   margin-bottom: 1rem;
 }
 
+.mx-1 {
+  margin-left: 0.25rem;
+  margin-right: 0.25rem;
+}
+
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -765,6 +770,18 @@ body {
 
 .mt-\[20px\] {
   margin-top: 20px;
+}
+
+.mt-4 {
+  margin-top: 1rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
 }
 
 .flex {
@@ -855,12 +872,40 @@ body {
   height: 400px;
 }
 
+.h-48 {
+  height: 12rem;
+}
+
+.h-\[150px\] {
+  height: 150px;
+}
+
+.h-\[175px\] {
+  height: 175px;
+}
+
 .min-h-\[100dvh\] {
   min-height: 100dvh;
 }
 
 .min-h-\[20dvh\] {
   min-height: 20dvh;
+}
+
+.min-h-\[175px\] {
+  min-height: 175px;
+}
+
+.min-h-\[1dvh\] {
+  min-height: 1dvh;
+}
+
+.min-h-\[10dvh\] {
+  min-height: 10dvh;
+}
+
+.min-h-\[30dvh\] {
+  min-height: 30dvh;
 }
 
 .w-1\/2 {
@@ -945,6 +990,16 @@ body {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
 .cursor-default {
   cursor: default;
 }
@@ -969,6 +1024,10 @@ body {
 
 .grid-cols-2 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
 }
 
 .flex-col {
@@ -1057,6 +1116,18 @@ body {
   border-radius: 0.75rem;
 }
 
+.rounded {
+  border-radius: 0.25rem;
+}
+
+.rounded-full {
+  border-radius: 9999px;
+}
+
+.rounded-lg {
+  border-radius: var(--radius);
+}
+
 .rounded-b-xl {
   border-bottom-right-radius: 0.75rem;
   border-bottom-left-radius: 0.75rem;
@@ -1079,8 +1150,25 @@ body {
   border-top-width: 1px;
 }
 
+.border-b-2 {
+  border-bottom-width: 2px;
+}
+
+.border-t-2 {
+  border-top-width: 2px;
+}
+
 .border-input {
   border-color: hsl(var(--input));
+}
+
+.border-blue-500 {
+  --tw-border-opacity: 1;
+  border-color: rgb(59 130 246 / var(--tw-border-opacity));
+}
+
+.border-primary {
+  border-color: hsl(var(--primary));
 }
 
 .bg-background {
@@ -1120,6 +1208,16 @@ body {
 .bg-white {
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+}
+
+.bg-blue-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(59 130 246 / var(--tw-bg-opacity));
+}
+
+.bg-gray-300 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity));
 }
 
 .bg-cover {
@@ -1310,6 +1408,20 @@ body {
 
 .text-secondary-foreground {
   color: hsl(var(--secondary-foreground));
+}
+
+.text-white {
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-blue-500 {
+  --tw-text-opacity: 1;
+  color: rgb(59 130 246 / var(--tw-text-opacity));
+}
+
+.text-secondary {
+  color: hsl(var(--secondary));
 }
 
 .underline-offset-4 {
@@ -1609,6 +1721,14 @@ body {
     display: block;
   }
 
+  .md\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .md\:space-y-16 > :not([hidden]) ~ :not([hidden]) {
     --tw-space-y-reverse: 0;
     margin-top: calc(4rem * calc(1 - var(--tw-space-y-reverse)));
@@ -1628,6 +1748,12 @@ body {
   .md\:py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
