@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const ContactPage = () => {
   return (
-    <Container className="flex-col md:space-y-5">
+    <Container className="flex-col">
       <h2 className="w-full text-xl font-bold text-center capitalize">
         Contact Us
       </h2>

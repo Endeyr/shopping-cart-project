@@ -2,7 +2,7 @@ import Container from "@/components/container";
 
 const AboutPage = () => {
   return (
-    <Container className="flex-col justify-start">
+    <Container className="flex-col">
       <h2 className="w-full text-xl font-bold text-center capitalize">
         About Us
       </h2>

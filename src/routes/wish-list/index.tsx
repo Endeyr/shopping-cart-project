@@ -2,7 +2,7 @@ import Container from "@/components/container";
 
 const WishListPage = () => {
   return (
-    <Container className="flex-col justify-start">
+    <Container className="flex-col">
       <h2 className="w-full text-xl font-bold text-center capitalize">
         Wish List
       </h2>

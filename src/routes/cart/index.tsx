@@ -2,7 +2,7 @@ import Container from "@/components/container";
 
 const CartPage = () => {
   return (
-    <Container className="flex-col justify-start">
+    <Container className="flex-col">
       <h2 className="w-full text-xl font-bold text-center capitalize">Cart</h2>
       <ul className="flex flex-col w-full gap-4">
         <li className="grid grid-cols-4 gap-4 p-2 border min-h-[20dvh]">
