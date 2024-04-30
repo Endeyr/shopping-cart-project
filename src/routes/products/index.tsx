@@ -9,7 +9,7 @@ const ITEMS_PER_PAGE = 12;
 
 const ProductsPage = () => {
   const [items, setItems] = useState<ItemType[]>([]);
-  const [itemsLoading, setItemsLoading] = useState(true);
+  const [isLoadingItems, setIsLoadingItems] = useState(true);
   const [itemsError, setItemsError] = useState<Error | null>(null);
   // Pagination using React Router
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -31,7 +31,7 @@ const ProductsPage = () => {
       } catch (error: unknown) {
         setItemsError(error as Error);
       } finally {
-        setItemsLoading(false);
+        setIsLoadingItems(false);
       }
     };
     fetchItemsData();
@@ -64,19 +64,21 @@ const ProductsPage = () => {
         <h2 className="flex items-center justify-center w-full text-xl font-bold">
           Products
         </h2>
-        {itemsLoading ? (
+        {isLoadingItems ? (
           <div className="flex items-center justify-center h-48">
             <div className="w-10 h-10 border-t-2 border-b-2 rounded-full border-primary animate-spin"></div>
           </div>
         ) : itemsError ? (
-          <div className="p-4 mx-2">Error: {itemsError.message}</div>
+          <div className="p-4 mx-2 text-destructive">
+            Error: {itemsError.message}
+          </div>
         ) : (
           <>
             <div className="grid w-full grid-cols-1 col-span-4 md:grid-cols-2 lg:grid-cols-4">
               {paginatedItems.map((item) => (
                 <div key={item.id} className="border min-h-[25dvh] p-2">
                   <Link
-                    to={`/product/${item.id}`}
+                    to={`/product/${item.id}/${item.name}`}
                     className="flex flex-col justify-between w-full h-full"
                   >
                     <div>
