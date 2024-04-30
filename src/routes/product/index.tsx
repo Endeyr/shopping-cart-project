@@ -1,12 +1,16 @@
 import Container from "@/components/container";
 import { fetchPriceById } from "@/services/api/index";
+import { ItemType, OutletContextType } from "@/types/type";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useOutletContext, useParams } from "react-router-dom";
 const ProductPage = () => {
+  const [items] = useOutletContext<OutletContextType>();
   const [itemPrice, setItemPrice] = useState(0);
-  const { id, name } = useParams<{ id: string; name: string }>();
+  const { id } = useParams<{ id: string }>();
   const [isLoadingItem, setIsLoadingItem] = useState(true);
   const [itemError, setItemError] = useState<Error | null>(null);
+  const filteredItem = items.filter((item: ItemType) => item.id === Number(id));
+  const { name, examine, icon } = filteredItem[0];
 
   useEffect(() => {
     let isMounted = true;
@@ -52,8 +56,10 @@ const ProductPage = () => {
           {/* Item */}
           <h2>{name}</h2>
           <div className="grid w-full grid-cols-3">
-            <div className="h-[400px] border">Image</div>
-            <div className="h-[400px] border">Description</div>
+            <div className="h-[400px] border">
+              <img src={icon} />
+            </div>
+            <div className="h-[400px] border">{examine}</div>
             <div className="h-[400px] border">
               {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp + Add to
               Cart Buttons

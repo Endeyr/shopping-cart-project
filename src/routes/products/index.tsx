@@ -1,14 +1,19 @@
 import Container from "@/components/container";
 import Pagination from "@/components/pagination";
 import { fetchAllItems } from "@/services/api/index";
-import { ItemType } from "@/types/type";
+import { OutletContextType } from "@/types/type";
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
 
 const ITEMS_PER_PAGE = 12;
 
 const ProductsPage = () => {
-  const [items, setItems] = useState<ItemType[]>([]);
+  const [items, setItems] = useOutletContext<OutletContextType>();
   const [isLoadingItems, setIsLoadingItems] = useState(true);
   const [itemsError, setItemsError] = useState<Error | null>(null);
   // Pagination using React Router
@@ -38,7 +43,7 @@ const ProductsPage = () => {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [setItems]);
 
   useEffect(() => {
     if (page) {
@@ -78,7 +83,7 @@ const ProductsPage = () => {
               {paginatedItems.map((item) => (
                 <div key={item.id} className="border min-h-[25dvh] p-2">
                   <Link
-                    to={`/product/${item.id}/${item.name}`}
+                    to={`/product/${item.id}`}
                     className="flex flex-col justify-between w-full h-full"
                   >
                     <div>

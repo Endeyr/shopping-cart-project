@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type ItemType = {
   examine: string;
   id: number;
@@ -16,3 +18,7 @@ export type PaginationProps = {
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
 };
+export type OutletContextType = [
+  ItemType[],
+  Dispatch<SetStateAction<ItemType[]>>,
+];
