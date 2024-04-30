@@ -31,16 +31,20 @@ export const fetchPriceById = async (id: string, isMounted: boolean) => {
     data: PriceDataType,
     id: string,
   ): PriceType | undefined => {
-    return data[id]; // Return price data for the given item ID, if exists
+    if (data[id]) {
+      return data[id]; // Return price data for the given item ID, if exists
+    } else {
+      return { avgHighPrice: 0, avgLowPrice: 0 };
+    }
   };
   // Filter price data by the provided item ID
   const priceObj = filterDataById(data.data, id);
   // Throw error if item ID is not found in the price data
-  if (priceObj) {
-    return priceObj;
-  } else {
-    throw new Error("Id not found");
-  }
+  const avgHighPrice = priceObj?.avgHighPrice ?? 0;
+  const avgLowPrice = priceObj?.avgLowPrice ?? 0;
+  // set price as avg of high and low
+  const priceCalc = (avgHighPrice + avgLowPrice) / 2;
+  return priceCalc;
 };
 // Function to fetch item name by item ID from an external API
 export const fetchIdByName = async (name: string, isMounted: boolean) => {
