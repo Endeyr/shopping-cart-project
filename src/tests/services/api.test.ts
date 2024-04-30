@@ -24,8 +24,7 @@ describe("testing api", () => {
     // assert on the response
     const response = await fetchPriceById("1", true);
 
-    expect(response?.avgHighPrice).toEqual(10);
-    expect(response?.avgLowPrice).toEqual(5);
+    expect(response).toEqual(7.5);
 
     // assert on the times called and arguments given to fetch
     expect(fetchMock.requests().length).toEqual(1);
