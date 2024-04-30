@@ -4,13 +4,26 @@ import { ItemType, OutletContextType } from "@/types/type";
 import { useEffect, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 const ProductPage = () => {
-  const [items] = useOutletContext<OutletContextType>();
+  const { items, isLoading, setIsLoading, error, setError } =
+    useOutletContext<OutletContextType>();
   const [itemPrice, setItemPrice] = useState(0);
-  const { id } = useParams<{ id: string }>();
-  const [isLoadingItem, setIsLoadingItem] = useState(true);
-  const [itemError, setItemError] = useState<Error | null>(null);
+  const idObj = useParams();
+  const id = idObj.id;
+
   const filteredItem = items.filter((item: ItemType) => item.id === Number(id));
-  const { name, examine, icon } = filteredItem[0];
+  let item;
+  if (filteredItem !== undefined) {
+    item = filteredItem[0];
+  } else {
+    const saved = localStorage.getItem("items");
+    if (saved) {
+      const parsedSaved = JSON.parse(saved);
+      const filteredSaved = parsedSaved.filter(
+        (item: ItemType) => item.id === Number(id),
+      );
+      item = filteredSaved[0];
+    }
+  }
 
   useEffect(() => {
     let isMounted = true;
@@ -24,42 +37,39 @@ const ProductPage = () => {
           // set price as avg of high and low
           const priceCalc = (avgHighPrice + avgLowPrice) / 2;
           setItemPrice(priceCalc);
-          setItemError(null);
         } else {
-          throw new Error("id undefined");
+          throw new Error("Error: Id not found in items");
         }
       } catch (error: unknown) {
         setItemPrice(0);
-        setItemError(error as Error);
+        setError(error as Error);
       } finally {
-        setIsLoadingItem(false);
+        setError(null);
+        setIsLoading(false);
       }
     };
-    fetchItemData();
+    if (isMounted) fetchItemData();
     return () => {
       isMounted = false;
     };
-  }, [id]);
+  }, [id, setError, setIsLoading]);
 
   return (
     <Container className="flex-col">
-      {isLoadingItem ? (
+      {isLoading ? (
         <div className="flex items-center justify-center h-48">
           <div className="w-10 h-10 border-t-2 border-b-2 rounded-full border-primary animate-spin"></div>
         </div>
-      ) : itemError ? (
-        <div className="p-4 mx-2 text-destructive">
-          Error: {itemError.message}
-        </div>
+      ) : error ? (
+        <div className="p-4 mx-2 text-destructive">Error: {error.message}</div>
       ) : (
         <>
-          {/* Item */}
-          <h2>{name}</h2>
+          <h2>{item.name}</h2>
           <div className="grid w-full grid-cols-3">
             <div className="h-[400px] border">
-              <img src={icon} />
+              <img src={item.icon} />
             </div>
-            <div className="h-[400px] border">{examine}</div>
+            <div className="h-[400px] border">{item.examine}</div>
             <div className="h-[400px] border">
               {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp + Add to
               Cart Buttons

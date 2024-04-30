@@ -18,7 +18,15 @@ export type PaginationProps = {
   totalPages: number;
   onPageChange: (pageNumber: number) => void;
 };
-export type OutletContextType = [
-  ItemType[],
-  Dispatch<SetStateAction<ItemType[]>>,
-];
+export type OutletContextType = {
+  items: ItemType[];
+  setItems: Dispatch<SetStateAction<ItemType[]>>;
+  isLoading: boolean;
+  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  error: Error | null;
+  setError: Dispatch<SetStateAction<Error | null>>;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  totalPages: number;
+  setTotalPages: Dispatch<SetStateAction<number>>;
+};

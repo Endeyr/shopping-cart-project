@@ -1,58 +1,36 @@
 import Container from "@/components/container";
 import Pagination from "@/components/pagination";
-import { fetchAllItems } from "@/services/api/index";
 import { OutletContextType } from "@/types/type";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Link,
   useNavigate,
   useOutletContext,
   useParams,
 } from "react-router-dom";
-
-const ITEMS_PER_PAGE = 12;
+import { ITEMS_PER_PAGE } from "../root";
 
 const ProductsPage = () => {
-  const [items, setItems] = useOutletContext<OutletContextType>();
-  const [isLoadingItems, setIsLoadingItems] = useState(true);
-  const [itemsError, setItemsError] = useState<Error | null>(null);
-  // Pagination using React Router
-  const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(1);
+  const { items, currentPage, setCurrentPage, isLoading, error, totalPages } =
+    useOutletContext<OutletContextType>();
 
   const navigate = useNavigate();
   const { page } = useParams<{ page: string }>();
 
   useEffect(() => {
     let isMounted = true;
-    const fetchItemsData = async () => {
-      try {
-        const itemsFetch = await fetchAllItems(isMounted);
-        if (itemsFetch !== undefined) {
-          setItems(itemsFetch);
-          setTotalPages(Math.ceil(itemsFetch.length / ITEMS_PER_PAGE));
+    if (isMounted) {
+      if (page) {
+        const pageNumber = parseInt(page) ?? 1;
+        if (pageNumber !== currentPage) {
+          setCurrentPage(pageNumber);
         }
-        setItemsError(null);
-      } catch (error: unknown) {
-        setItemsError(error as Error);
-      } finally {
-        setIsLoadingItems(false);
       }
-    };
-    fetchItemsData();
+    }
     return () => {
       isMounted = false;
     };
-  }, [setItems]);
-
-  useEffect(() => {
-    if (page) {
-      const pageNumber = parseInt(page) ?? 1;
-      if (pageNumber !== currentPage) {
-        setCurrentPage(pageNumber);
-      }
-    }
-  }, [page, currentPage]);
+  }, [page, currentPage, setCurrentPage]);
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
@@ -69,13 +47,13 @@ const ProductsPage = () => {
         <h2 className="flex items-center justify-center w-full text-xl font-bold">
           Products
         </h2>
-        {isLoadingItems ? (
+        {isLoading ? (
           <div className="flex items-center justify-center h-48">
             <div className="w-10 h-10 border-t-2 border-b-2 rounded-full border-primary animate-spin"></div>
           </div>
-        ) : itemsError ? (
+        ) : error ? (
           <div className="p-4 mx-2 text-destructive">
-            Error: {itemsError.message}
+            Error: {error.message}
           </div>
         ) : (
           <>
