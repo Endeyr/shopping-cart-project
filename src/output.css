@@ -1446,6 +1446,10 @@ body {
   color: hsl(var(--secondary));
 }
 
+.text-destructive {
+  color: hsl(var(--destructive));
+}
+
 .underline-offset-4 {
   text-underline-offset: 4px;
 }
