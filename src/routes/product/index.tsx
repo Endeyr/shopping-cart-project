@@ -29,16 +29,13 @@ const ProductPage = () => {
     let isMounted = true;
     const fetchItemData = async () => {
       try {
-        if (id) {
-          const priceObj = await fetchPriceById(id, isMounted);
-          // check if prices are undefined or null
-          const avgHighPrice = priceObj?.avgHighPrice ?? 0;
-          const avgLowPrice = priceObj?.avgLowPrice ?? 0;
-          // set price as avg of high and low
-          const priceCalc = (avgHighPrice + avgLowPrice) / 2;
-          setItemPrice(priceCalc);
-        } else {
+        if (id === undefined) {
           throw new Error("Error: Id not found in items");
+        } else {
+          const price = await fetchPriceById(id, isMounted);
+          if (price !== undefined) {
+            setItemPrice(price);
+          }
         }
       } catch (error: unknown) {
         setItemPrice(0);
@@ -70,10 +67,14 @@ const ProductPage = () => {
               <img src={item.icon} />
             </div>
             <div className="h-[400px] border">{item.examine}</div>
-            <div className="h-[400px] border">
-              {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp + Add to
-              Cart Buttons
-            </div>
+            {itemPrice > 0 ? (
+              <div className="h-[400px] border">
+                {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp + Add
+                to Cart Buttons
+              </div>
+            ) : (
+              <div className="h-[400px] border">Price Unavailable</div>
+            )}
           </div>
           {/* Reviews / Comments */}
           <div>Comments / Reviews</div>
