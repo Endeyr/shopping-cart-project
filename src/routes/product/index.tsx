@@ -1,8 +1,17 @@
 import Container from "@/components/container";
 import { fetchPriceById } from "@/services/api/index";
 import { CartType, ItemType, OutletContextType } from "@/types/type";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+
+const initialFormData: CartType = {
+  examine: "",
+  id: 0,
+  icon: "",
+  name: "",
+  price: 0,
+  quantity: 0,
+};
 
 const ProductPage = () => {
   const {
@@ -17,6 +26,7 @@ const ProductPage = () => {
     setWishList,
   } = useOutletContext<OutletContextType>();
   const [itemPrice, setItemPrice] = useState(0);
+  const [formData, setFormData] = useState<CartType>(initialFormData);
   const idObj = useParams<{ id: string }>();
   const id = idObj.id;
   const navigate = useNavigate();
@@ -62,37 +72,44 @@ const ProductPage = () => {
     };
   }, [id, setError, setIsLoading]);
 
-  const handleOnClick = (
-    arrayId: string,
-    item: ItemType,
-    itemPrice: number,
-  ) => {
-    // add default behavior
-    if (arrayId === "cart") {
-      const newCartItem: CartType = { ...item, price: itemPrice, quantity: 1 };
-      if (cart.some((existingItem) => existingItem.id === newCartItem.id)) {
-        console.log("item already in cart");
-      } else {
-        const newCart: CartType[] = [...cart, newCartItem];
-        setCart(newCart);
-        navigate("/cart");
-      }
+  const handleCartChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setFormData({
+      ...formData,
+      ...item,
+      price: itemPrice,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleCartSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formData.quantity <= 0) {
+      throw new Error("Unable to add 0 quantity to cart.");
     }
-    if (arrayId === "wish-list") {
-      const newWishListItem: CartType = {
-        ...item,
-        price: itemPrice,
-        quantity: 1,
-      };
-      if (
-        wishList.some((existingItem) => existingItem.id === newWishListItem.id)
-      ) {
-        console.log("item already in wish list");
-      } else {
-        const newWishList: CartType[] = [...wishList, newWishListItem];
-        setWishList(newWishList);
-        navigate("/wish-list");
-      }
+    if (cart.some((existingItem) => existingItem.id === formData.id)) {
+      console.log("item already in cart");
+    } else {
+      const newCart: CartType[] = [...cart, formData];
+      setCart(newCart);
+      navigate("/cart");
+    }
+    console.log("Form submitted:", formData);
+  };
+
+  const handleWishListOnClick = (item: ItemType, itemPrice: number) => {
+    const newWishListItem: CartType = {
+      ...item,
+      price: itemPrice,
+      quantity: 1,
+    };
+    if (
+      wishList.some((existingItem) => existingItem.id === newWishListItem.id)
+    ) {
+      console.log("item already in wish list");
+    } else {
+      const newWishList: CartType[] = [...wishList, newWishListItem];
+      setWishList(newWishList);
+      navigate("/wish-list");
     }
   };
 
@@ -118,21 +135,30 @@ const ProductPage = () => {
                 {itemPrice > 0 ? (
                   <div className="h-[400px] border">
                     <div>
-                      {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}
+                      Price:
+                      {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp
                     </div>
                     <div className="flex flex-col">
-                      <button
-                        onClick={() => handleOnClick("cart", item, itemPrice)}
-                      >
-                        Add to Cart
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleOnClick("wish-list", item, itemPrice)
-                        }
-                      >
-                        Add to Wish List
-                      </button>
+                      <form onSubmit={handleCartSubmit}>
+                        <label htmlFor="quantity">Quantity</label>
+                        <input
+                          id="quantity"
+                          name="quantity"
+                          type="number"
+                          value={formData?.quantity}
+                          onChange={handleCartChange}
+                          min="1"
+                          placeholder="Pick a number..."
+                        />
+                        <button type="submit">Add to Cart</button>
+                      </form>
+                      <div>
+                        <button
+                          onClick={() => handleWishListOnClick(item, itemPrice)}
+                        >
+                          Add to Wish List
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ) : (
