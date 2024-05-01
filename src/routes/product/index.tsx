@@ -84,7 +84,9 @@ const ProductPage = () => {
         price: itemPrice,
         quantity: 1,
       };
-      if (cart.some((existingItem) => existingItem.id === newWishListItem.id)) {
+      if (
+        wishList.some((existingItem) => existingItem.id === newWishListItem.id)
+      ) {
         console.log("item already in wish list");
       } else {
         const newWishList: CartType[] = [...wishList, newWishListItem];

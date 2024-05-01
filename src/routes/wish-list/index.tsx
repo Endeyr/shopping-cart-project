@@ -13,7 +13,9 @@ const WishListPage = () => {
 
   return (
     <Container className="flex-col">
-      <h2 className="w-full text-xl font-bold text-center capitalize">Cart</h2>
+      <h2 className="w-full text-xl font-bold text-center capitalize">
+        Wish List
+      </h2>
       {isLoading ? (
         <div className="flex flex-col items-center justify-center h-48 gap-4">
           <h2 className="text-2xl">Loading...</h2>
