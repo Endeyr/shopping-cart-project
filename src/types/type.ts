@@ -6,9 +6,13 @@ export type ItemType = {
   icon: string;
   name: string;
 };
+export type CartType = ItemType & {
+  price: number;
+  quantity: number;
+};
 export type PriceType = {
-  avgHighPrice: number | null;
-  avgLowPrice: number | null;
+  high: number | null;
+  low: number | null;
 };
 export type PriceDataType = {
   [key: string]: PriceType;
@@ -29,4 +33,8 @@ export type OutletContextType = {
   setCurrentPage: Dispatch<SetStateAction<number>>;
   totalPages: number;
   setTotalPages: Dispatch<SetStateAction<number>>;
+  wishList: CartType[];
+  setWishList: Dispatch<SetStateAction<CartType[]>>;
+  cart: CartType[];
+  setCart: Dispatch<SetStateAction<CartType[]>>;
 };

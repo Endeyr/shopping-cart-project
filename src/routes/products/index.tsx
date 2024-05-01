@@ -21,7 +21,7 @@ const ProductsPage = () => {
     let isMounted = true;
     if (isMounted) {
       if (page) {
-        const pageNumber = parseInt(page) ?? 1;
+        const pageNumber = parseInt(page) || 1;
         if (pageNumber !== currentPage) {
           setCurrentPage(pageNumber);
         }
@@ -48,7 +48,8 @@ const ProductsPage = () => {
           Products
         </h2>
         {isLoading ? (
-          <div className="flex items-center justify-center h-48">
+          <div className="flex flex-col items-center justify-center h-48 gap-4">
+            <h2 className="text-2xl">Loading...</h2>
             <div className="w-10 h-10 border-t-2 border-b-2 rounded-full border-primary animate-spin"></div>
           </div>
         ) : error ? (
@@ -72,7 +73,6 @@ const ProductsPage = () => {
                       <img
                         src={item.icon}
                         alt={item.name}
-                        srcSet={`${item.icon}?7263b 100w`}
                         width={25}
                         height={25}
                         className="object-scale-down"
