@@ -11,10 +11,8 @@ describe("testing api", () => {
       JSON.stringify({
         data: {
           "1": {
-            avgHighPrice: 10,
-            highPriceVolume: 2,
-            avgLowPrice: 5,
-            lowPriceVolume: 1,
+            high: 10,
+            low: 5,
           },
         },
         timestamp: 1713275100,
@@ -29,7 +27,7 @@ describe("testing api", () => {
     // assert on the times called and arguments given to fetch
     expect(fetchMock.requests().length).toEqual(1);
     expect(fetchMock.requests()[0].url).toEqual(
-      "https://prices.runescape.wiki/api/v1/osrs/5m",
+      "https://prices.runescape.wiki/api/v1/osrs/latest",
     );
   });
 
