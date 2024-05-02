@@ -49,9 +49,14 @@ const CartPage = () => {
         </>
       )}
       <div className="flex justify-end w-full px-2 mx-2">
-        <span className="mr-[140px] text-lg font-bold">
-          Total: {Number(totalPrice.toFixed(0)).toLocaleString("en-US")}gp
-        </span>
+        <div className="flex gap-4">
+          <div>
+            <Link to={"/checkout"}>Proceed to checkout</Link>
+          </div>
+          <div className="mr-[140px] text-lg font-bold">
+            Total: {Number(totalPrice.toFixed(0)).toLocaleString("en-US")}gp
+          </div>
+        </div>
       </div>
     </Container>
   );
