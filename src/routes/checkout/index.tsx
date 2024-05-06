@@ -1,5 +1,6 @@
 import Container from "@/components/container";
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 type AddressType = {
   street: string;
@@ -37,6 +38,9 @@ const CheckoutPage = () => {
   const [isPaymentSubmitted, setIsPaymentSubmitted] = useState(false);
   const [addressFormError, setAddressFormError] = useState("");
   const [paymentFormError, setPaymentFormError] = useState("");
+
+  const navigate = useNavigate();
+
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAddressFormData({
       ...addressFormData,
@@ -88,15 +92,19 @@ const CheckoutPage = () => {
       <div>
         {isAddressSubmitted ? (
           <>
-            <div>Review</div>
+            <div>Review Address Info</div>
             <div>
               <div>{addressFormData.street}</div>
               <div>{addressFormData.city}</div>
               <div>{addressFormData.state}</div>
               <div>{addressFormData.zip}</div>
-              {/* TODO */}
-              <div>Confirm Button</div>
-              <div>Edit Button</div>
+              <button
+                onClick={() => {
+                  setIsAddressSubmitted(false);
+                }}
+              >
+                Edit
+              </button>
             </div>
           </>
         ) : (
@@ -167,15 +175,19 @@ const CheckoutPage = () => {
       <div>
         {isPaymentSubmitted ? (
           <>
-            <div>Review</div>
+            <div>Review Payment Info</div>
             <div>
               <div>{paymentFormData.cardNumber}</div>
               <div>{paymentFormData.cardName}</div>
               <div>{paymentFormData.expirationMonth}</div>
               <div>{paymentFormData.expirationYear}</div>
-              {/* TODO */}
-              <div>Confirm Button</div>
-              <div>Edit Button</div>
+              <button
+                onClick={() => {
+                  setIsPaymentSubmitted(false);
+                }}
+              >
+                Edit
+              </button>
             </div>
           </>
         ) : (
@@ -255,6 +267,18 @@ const CheckoutPage = () => {
           </>
         )}
       </div>
+      {isAddressSubmitted && isPaymentSubmitted && (
+        <>
+          <button
+            onClick={() => {
+              console.log("Confirmed and submitted to backend");
+              navigate("/confirmation");
+            }}
+          >
+            Confirm
+          </button>
+        </>
+      )}
     </Container>
   );
 };
