@@ -4,14 +4,15 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
 import ErrorPage from "./error-page";
 import "./index.css";
-import About from "./routes/about";
-import Cart from "./routes/cart";
-import Checkout from "./routes/checkout";
-import Contact from "./routes/contact";
-import Product from "./routes/product";
-import Products from "./routes/products";
+import AboutPage from "./routes/about";
+import CartPage from "./routes/cart";
+import CheckoutPage from "./routes/checkout";
+import ConfirmationPage from "./routes/confirmation";
+import ContactPage from "./routes/contact";
+import ProductPage from "./routes/product";
+import ProductsPage from "./routes/products";
 import Root from "./routes/root";
-import WishList from "./routes/wish-list";
+import WishListPage from "./routes/wish-list";
 
 const router = createBrowserRouter([
   {
@@ -25,31 +26,35 @@ const router = createBrowserRouter([
       },
       {
         path: "about",
-        element: <About />,
+        element: <AboutPage />,
       },
       {
         path: "cart",
-        element: <Cart />,
+        element: <CartPage />,
       },
       {
         path: "checkout",
-        element: <Checkout />,
+        element: <CheckoutPage />,
       },
       {
         path: "contact",
-        element: <Contact />,
+        element: <ContactPage />,
       },
       {
         path: "product/:id",
-        element: <Product />,
+        element: <ProductPage />,
       },
       {
         path: "products/:page",
-        element: <Products />,
+        element: <ProductsPage />,
       },
       {
         path: "wish-list",
-        element: <WishList />,
+        element: <WishListPage />,
+      },
+      {
+        path: "confirmation",
+        element: <ConfirmationPage />,
       },
     ],
   },
