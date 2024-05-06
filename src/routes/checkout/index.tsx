@@ -1,5 +1,6 @@
 import Container from "@/components/container";
 import { ChangeEvent, FormEvent, useState } from "react";
+
 type AddressType = {
   street: string;
   city: string;
@@ -12,12 +13,30 @@ const initialAddressFormData = {
   state: "",
   zip: "",
 };
+type PaymentType = {
+  cardNumber: string;
+  cardName: string;
+  expirationMonth: string;
+  expirationYear: string;
+};
+const initialPaymentFormData = {
+  cardNumber: "",
+  cardName: "",
+  expirationMonth: "",
+  expirationYear: "",
+};
+
 const CheckoutPage = () => {
   const [addressFormData, setAddressFormData] = useState<AddressType>(
     initialAddressFormData,
   );
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formError, setFormError] = useState("");
+  const [paymentFormData, setPaymentFormData] = useState<PaymentType>(
+    initialPaymentFormData,
+  );
+  const [isAddressSubmitted, setIsAddressSubmitted] = useState(false);
+  const [isPaymentSubmitted, setIsPaymentSubmitted] = useState(false);
+  const [addressFormError, setAddressFormError] = useState("");
+  const [paymentFormError, setPaymentFormError] = useState("");
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAddressFormData({
       ...addressFormData,
@@ -28,23 +47,46 @@ const CheckoutPage = () => {
     e.preventDefault();
     // form validation
     if (addressFormData.street === "") {
-      setFormError("invalid street entry");
+      setAddressFormError("invalid street entry");
     } else if (addressFormData.state === "") {
-      setFormError("invalid state entry");
+      setAddressFormError("invalid state entry");
     } else if (addressFormData.city === "") {
-      setFormError("invalid city entry");
+      setAddressFormError("invalid city entry");
     } else if (addressFormData.zip === "") {
-      setFormError("invalid zip entry");
+      setAddressFormError("invalid zip entry");
     } else {
-      setIsSubmitted(true);
-      console.log("Form Submitted");
+      setIsAddressSubmitted(true);
+      console.log("Address Form Submitted");
     }
     console.log(addressFormData);
+  };
+  const handlePaymentChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setPaymentFormData({
+      ...paymentFormData,
+      [e.target.name]: e.target.value,
+    });
+  };
+  const handlePaymentSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    // form validation
+    if (paymentFormData.cardNumber === "") {
+      setPaymentFormError("invalid card number entry");
+    } else if (paymentFormData.cardName === "") {
+      setPaymentFormError("invalid card name entry");
+    } else if (paymentFormData.expirationMonth === "") {
+      setPaymentFormError("invalid expiration month entry");
+    } else if (paymentFormData.expirationYear === "") {
+      setPaymentFormError("invalid expiration year entry");
+    } else {
+      setIsPaymentSubmitted(true);
+      console.log("Payment Form Submitted");
+    }
+    console.log(paymentFormData);
   };
   return (
     <Container className="flex-col">
       <div>
-        {isSubmitted ? (
+        {isAddressSubmitted ? (
           <>
             <div>Review</div>
             <div>
@@ -52,6 +94,7 @@ const CheckoutPage = () => {
               <div>{addressFormData.city}</div>
               <div>{addressFormData.state}</div>
               <div>{addressFormData.zip}</div>
+              {/* TODO */}
               <div>Confirm Button</div>
               <div>Edit Button</div>
             </div>
@@ -60,8 +103,10 @@ const CheckoutPage = () => {
           <>
             <h2>Address</h2>
             <form onSubmit={handleAddressSubmit}>
-              {formError && (
-                <div className="text-destructive">Error: {formError}</div>
+              {addressFormError && (
+                <div className="text-destructive">
+                  Error: {addressFormError}
+                </div>
               )}
               <div>
                 <label htmlFor="street">Street:</label>
@@ -119,7 +164,97 @@ const CheckoutPage = () => {
         )}
       </div>
       {/* Payment Info */}
-      <div>Payment Info</div>
+      <div>
+        {isPaymentSubmitted ? (
+          <>
+            <div>Review</div>
+            <div>
+              <div>{paymentFormData.cardNumber}</div>
+              <div>{paymentFormData.cardName}</div>
+              <div>{paymentFormData.expirationMonth}</div>
+              <div>{paymentFormData.expirationYear}</div>
+              {/* TODO */}
+              <div>Confirm Button</div>
+              <div>Edit Button</div>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2>Payment</h2>
+            <form onSubmit={handlePaymentSubmit}>
+              {paymentFormError && (
+                <div className="text-destructive">
+                  Error: {paymentFormError}
+                </div>
+              )}
+              <div>
+                <label htmlFor="cardName">Name:</label>
+                <input
+                  id="cardName"
+                  type="text"
+                  name="cardName"
+                  placeholder="Name on the card..."
+                  value={paymentFormData.cardName}
+                  onChange={handlePaymentChange}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="cardNumber">Number:</label>
+                <input
+                  id="cardNumber"
+                  type="tel"
+                  name="cardNumber"
+                  placeholder="xxxx xxxx xxxx xxxx"
+                  inputMode="numeric"
+                  pattern="[0-9\s]{13,19}"
+                  maxLength={19}
+                  value={paymentFormData.cardNumber}
+                  onChange={handlePaymentChange}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="expirationMonth">Expiration Month:</label>
+                <input
+                  id="expirationMonth"
+                  type="number"
+                  name="expirationMonth"
+                  placeholder="01"
+                  maxLength={2}
+                  min="1"
+                  max="12"
+                  value={paymentFormData.expirationMonth}
+                  onChange={handlePaymentChange}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              <div>
+                <label htmlFor="expirationYear">Expiration Year:</label>
+                <input
+                  id="expirationYear"
+                  type="number"
+                  name="expirationYear"
+                  placeholder="2024"
+                  maxLength={4}
+                  min="2024"
+                  max="2050"
+                  value={paymentFormData.expirationYear}
+                  onChange={handlePaymentChange}
+                  autoComplete="off"
+                  required
+                />
+              </div>
+              <div>
+                <button type="submit">Submit</button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
     </Container>
   );
 };
