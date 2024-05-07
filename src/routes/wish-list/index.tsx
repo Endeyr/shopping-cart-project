@@ -1,15 +1,35 @@
 import Container from "@/components/container";
-import { OutletContextType } from "@/types/type";
-import { Link, useOutletContext } from "react-router-dom";
+import { CartType, OutletContextType } from "@/types/type";
+import { Link, useNavigate, useOutletContext } from "react-router-dom";
 
 const WishListPage = () => {
-  const { isLoading, error, wishList } = useOutletContext<OutletContextType>();
-
+  const { isLoading, error, wishList, setWishList, cart, setCart } =
+    useOutletContext<OutletContextType>();
+  const navigate = useNavigate();
   let totalPrice = 0;
   wishList.forEach((item) => {
     const subtotal = item.price * item.quantity;
     totalPrice += subtotal;
   });
+
+  const handleDelete = (id: number) => {
+    const deletedItemWishList = wishList.filter((item) => item.id !== id);
+    setWishList(deletedItemWishList);
+  };
+
+  const handleAddToCart = (id: number) => {
+    const newCartItem: CartType | undefined = wishList.find(
+      (item) => item.id === id,
+    );
+    if (newCartItem) {
+      const newCart: CartType[] = [...cart, { ...newCartItem, quantity: 1 }];
+      setCart(newCart);
+      handleDelete(id);
+      navigate("/cart");
+    } else {
+      console.log("Item with that id not found in wish list.");
+    }
+  };
 
   return (
     <Container className="flex-col">
@@ -23,7 +43,7 @@ const WishListPage = () => {
         </div>
       ) : error ? (
         <div className="p-4 mx-2 text-destructive">Error: {error.message}</div>
-      ) : (
+      ) : wishList.length > 0 ? (
         <>
           <ul className="flex flex-col w-full gap-4">
             {wishList.map((item) => (
@@ -37,8 +57,12 @@ const WishListPage = () => {
                   <div>Item: {item.name}</div>
                   <div>Description: {item.examine}</div>
                   <div className="flex gap-4">
-                    <button>Qty</button>
-                    <button>Delete</button>
+                    <button onClick={() => handleAddToCart(item.id)}>
+                      Add to Cart
+                    </button>
+                    <button onClick={() => handleDelete(item.id)}>
+                      Delete
+                    </button>
                   </div>
                 </div>
                 <div className="flex items-end justify-center">
@@ -49,6 +73,8 @@ const WishListPage = () => {
             ))}
           </ul>
         </>
+      ) : (
+        <Link to={"/products/1"}>Add items to wish list</Link>
       )}
       <div className="flex justify-end w-full px-2 mx-2">
         <span className="mr-[140px] text-lg font-bold">
