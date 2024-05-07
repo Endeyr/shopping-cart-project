@@ -133,6 +133,7 @@ const ProductPage = () => {
                 </div>
                 <div className="h-[400px] border">{item.examine}</div>
                 {itemPrice > 0 ? (
+                  // todo show a loader or spinner while price is loading
                   <div className="h-[400px] border">
                     <div>
                       Price:
