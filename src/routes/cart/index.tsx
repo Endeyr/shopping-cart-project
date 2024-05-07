@@ -3,13 +3,38 @@ import { OutletContextType } from "@/types/type";
 import { Link, useOutletContext } from "react-router-dom";
 
 const CartPage = () => {
-  const { isLoading, error, cart } = useOutletContext<OutletContextType>();
+  const { isLoading, error, cart, setCart } =
+    useOutletContext<OutletContextType>();
 
   let totalPrice = 0;
   cart.forEach((item) => {
     const subtotal = item.price * item.quantity;
     totalPrice += subtotal;
   });
+
+  const handleDelete = (id: number) => {
+    const deletedItemCart = cart.filter((item) => item.id !== id);
+    setCart(deletedItemCart);
+  };
+
+  const handleQtyChange = (id: number, change: number) => {
+    setCart((prevCart) => {
+      return prevCart.map((item) => {
+        if (item.id === id) {
+          const newQuantity = Number(item.quantity) + Number(change);
+          if (newQuantity <= 0) {
+            handleDelete(id);
+          } else {
+            return {
+              ...item,
+              quantity: newQuantity,
+            };
+          }
+        }
+        return item;
+      });
+    });
+  };
 
   return (
     <Container className="flex-col">
@@ -21,7 +46,7 @@ const CartPage = () => {
         </div>
       ) : error ? (
         <div className="p-4 mx-2 text-destructive">Error: {error.message}</div>
-      ) : (
+      ) : cart.length > 0 ? (
         <>
           <ul className="flex flex-col w-full gap-4">
             {cart.map((item) => (
@@ -35,8 +60,18 @@ const CartPage = () => {
                   <div>Item: {item.name}</div>
                   <div>Description: {item.examine}</div>
                   <div className="flex gap-4">
-                    <button>Qty</button>
-                    <button>Delete</button>
+                    <div>
+                      <button onClick={() => handleQtyChange(item.id, -1)}>
+                        -
+                      </button>
+                      <div>Qty: {item.quantity}</div>
+                      <button onClick={() => handleQtyChange(item.id, 1)}>
+                        +
+                      </button>
+                    </div>
+                    <button onClick={() => handleDelete(item.id)}>
+                      Delete
+                    </button>
                   </div>
                 </div>
                 <div className="flex items-end justify-center">
@@ -47,6 +82,8 @@ const CartPage = () => {
             ))}
           </ul>
         </>
+      ) : (
+        <Link to={"/products/1"}>Add items to cart</Link>
       )}
       <div className="flex justify-end w-full px-2 mx-2">
         <div className="flex gap-4">
