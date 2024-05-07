@@ -4,8 +4,6 @@ import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-// TODO Handle user input on search bar to filter items array based on search terms, then navigate to products or product page, search terms are added to url
-
 const SearchBar = () => {
   const [userInput, setUserInput] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
