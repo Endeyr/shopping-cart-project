@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ModeToggle } from "../theme-toggle";
 import NavLinks from "./nav-links";
-// import SearchBar from "./search-bar";
+import SearchBar from "./search-bar";
 
 const Navbar = () => {
   return (
@@ -10,7 +10,7 @@ const Navbar = () => {
         <Link to={"/"} className="w-full">
           Logo
         </Link>
-        {/* <SearchBar setItemName={setItemName} /> */}
+        <SearchBar />
         <ul className="flex items-center justify-between w-full col-span-2 col-start-4 gap-4 mx-4 space-x-1">
           <li>
             <ModeToggle />

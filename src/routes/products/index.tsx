@@ -1,22 +1,32 @@
 import Container from "@/components/container";
 import Pagination from "@/components/pagination";
-import { OutletContextType } from "@/types/type";
-import { useEffect } from "react";
+import { ItemType, OutletContextType } from "@/types/type";
+import { useEffect, useState } from "react";
 import {
   Link,
   useNavigate,
   useOutletContext,
   useParams,
+  useSearchParams,
 } from "react-router-dom";
 import { ITEMS_PER_PAGE } from "../root";
-
 const ProductsPage = () => {
-  const { items, currentPage, setCurrentPage, isLoading, error, totalPages } =
-    useOutletContext<OutletContextType>();
-
+  const {
+    items,
+    currentPage,
+    setCurrentPage,
+    isLoading,
+    error,
+    totalPages,
+    setTotalPages,
+  } = useOutletContext<OutletContextType>();
+  const [paginatedItems, setPaginatedItems] = useState<ItemType[]>([]);
+  const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { page } = useParams<{ page: string }>();
-
+  const searchTerm = searchParams.get("q");
+  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
+  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
   useEffect(() => {
     let isMounted = true;
     if (isMounted) {
@@ -31,16 +41,32 @@ const ProductsPage = () => {
       isMounted = false;
     };
   }, [page, currentPage, setCurrentPage]);
-
+  useEffect(() => {
+    if (searchTerm) {
+      const filteredItems = items.filter((item) => {
+        return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+      });
+      const newPaginatedItems = filteredItems.slice(
+        indexOfFirstItem,
+        indexOfLastItem,
+      );
+      if (newPaginatedItems.length > 0) {
+        setPaginatedItems(newPaginatedItems);
+        setTotalPages(Math.ceil(filteredItems.length / ITEMS_PER_PAGE));
+      }
+    } else {
+      const newPaginatedItems = items.slice(indexOfFirstItem, indexOfLastItem);
+      setPaginatedItems(newPaginatedItems);
+    }
+  }, [searchTerm, indexOfFirstItem, indexOfLastItem, items, setTotalPages]);
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
-    navigate(`/products/${pageNumber}`);
+    if (searchTerm) {
+      navigate(`/products/${pageNumber}/?q=${searchTerm}`);
+    } else {
+      navigate(`/products/${pageNumber}`);
+    }
   };
-
-  const indexOfLastItem = currentPage * ITEMS_PER_PAGE;
-  const indexOfFirstItem = indexOfLastItem - ITEMS_PER_PAGE;
-  const paginatedItems = items.slice(indexOfFirstItem, indexOfLastItem);
-
   return (
     <Container className="grid grid-cols-4">
       <div className="flex flex-col w-full h-full col-span-4 gap-2">

@@ -2,13 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { IoSearch } from "react-icons/io5";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
-const SearchBar = ({
-  setItemName,
-}: {
-  setItemName: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+// TODO Handle user input on search bar to filter items array based on search terms, then navigate to products or product page, search terms are added to url
+
+const SearchBar = () => {
   const [userInput, setUserInput] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const handleChange = (
     e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -17,7 +19,13 @@ const SearchBar = ({
   };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setItemName(userInput);
+    if (searchParams.get("q") !== userInput) {
+      const params = { q: userInput };
+      if (location.pathname.indexOf("/products/") === -1) {
+        navigate("/products/1");
+      }
+      setSearchParams(params);
+    }
     setUserInput("");
   };
   return (
