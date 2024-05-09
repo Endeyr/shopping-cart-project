@@ -1,3 +1,4 @@
+import logo from "@/assets/images/flag.webp";
 import { Link } from "react-router-dom";
 import { ModeToggle } from "../theme-toggle";
 import NavLinks from "./nav-links";
@@ -8,7 +9,12 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 hidden w-full border-b bg-os_header_lite dark:bg-os_header_dark md:block">
       <div className="grid items-center h-16 grid-cols-5 p-4">
         <Link to={"/"} className="w-full">
-          Logo
+          <img
+            src={logo}
+            alt="flag logo"
+            className="h-[50px] w-[125px] object-scale-down"
+            loading="lazy"
+          />
         </Link>
         <SearchBar />
         <ul className="flex items-center justify-between w-full col-span-2 col-start-4 gap-4 mx-4 space-x-1">
