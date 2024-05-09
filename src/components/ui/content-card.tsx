@@ -44,8 +44,12 @@ export const ContentCard = ({
           <p className="mt-1 text-sm text-gray-500">{header}</p>
         </div>
       )}
-      <div className="flex flex-col p-4 xl:h-72 md:p-5">
-        {title && <h3 className="text-lg font-bold text-gray-800">{title}</h3>}
+      <div className="flex flex-col p-4 xl:h-72 md:p-5 dark:text-black dark:bg-os_header_lite">
+        {title && (
+          <h3 className="text-lg font-bold text-center text-gray-800">
+            {title}
+          </h3>
+        )}
         {subtitle && (
           <p className="mt-1 text-xs font-medium text-gray-500 uppercase">
             {subtitle}
@@ -63,8 +67,10 @@ export const ContentCard = ({
         )}
       </div>
       {footer && (
-        <div className="px-4 py-3 bg-gray-100 border-t rounded-b-xl sm:px-5 md:py-4">
-          <p className="mt-1 text-sm text-gray-500">{footer}</p>
+        <div className="px-4 py-3 bg-gray-100 border-t dark:bg-os_header_dark rounded-b-xl sm:px-5 md:py-4">
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-100">
+            {footer}
+          </p>
         </div>
       )}
     </CardContainer>
