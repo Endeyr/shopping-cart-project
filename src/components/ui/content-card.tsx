@@ -44,7 +44,7 @@ export const ContentCard = ({
           <p className="mt-1 text-sm text-gray-500">{header}</p>
         </div>
       )}
-      <div className="flex flex-col p-4 xl:h-72 md:p-5 dark:text-black dark:bg-os_header_lite">
+      <div className="flex flex-col gap-2 p-4 justify-evenly xl:h-72 md:p-5 dark:text-black dark:bg-os_header_lite">
         {title && (
           <h3 className="text-lg font-bold text-center text-gray-800">
             {title}
