@@ -895,6 +895,14 @@ body {
   height: 630px;
 }
 
+.h-\[50px\] {
+  height: 50px;
+}
+
+.h-\[40px\] {
+  height: 40px;
+}
+
 .min-h-\[100dvh\] {
   min-height: 100dvh;
 }
@@ -945,6 +953,18 @@ body {
 
 .w-\[1200px\] {
   width: 1200px;
+}
+
+.w-\[250px\] {
+  width: 250px;
+}
+
+.w-\[125px\] {
+  width: 125px;
+}
+
+.w-\[120px\] {
+  width: 120px;
 }
 
 .min-w-\[8rem\] {
