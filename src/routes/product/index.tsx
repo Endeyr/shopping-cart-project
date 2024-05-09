@@ -129,11 +129,12 @@ const ProductPage = () => {
               <h2>{item.name}</h2>
               <div className="grid w-full grid-cols-3">
                 <div className="h-[400px] border">
+                  {/* TODO optimize image */}
                   <img src={item.icon} />
                 </div>
                 <div className="h-[400px] border">{item.examine}</div>
                 {itemPrice > 0 ? (
-                  // todo show a loader or spinner while price is loading
+                  // TODO show a loader or spinner while price is loading
                   <div className="h-[400px] border">
                     <div>
                       Price:
