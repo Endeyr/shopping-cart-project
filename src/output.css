@@ -791,6 +791,14 @@ body {
   margin-top: 20px;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.ml-8 {
+  margin-left: 2rem;
+}
+
 .flex {
   display: flex;
 }
@@ -820,6 +828,11 @@ body {
 .size-\[750px\] {
   width: 750px;
   height: 750px;
+}
+
+.size-\[400px\] {
+  width: 400px;
+  height: 400px;
 }
 
 .h-10 {
@@ -1020,6 +1033,10 @@ body {
   grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
@@ -1066,6 +1083,10 @@ body {
 
 .gap-4 {
   gap: 1rem;
+}
+
+.gap-16 {
+  gap: 4rem;
 }
 
 .space-x-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1299,6 +1320,16 @@ body {
 .py-3 {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.py-6 {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
 }
 
 .pl-8 {
