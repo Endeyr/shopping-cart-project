@@ -12,7 +12,7 @@ const Navbar = () => {
           <img
             src={logo}
             alt="flag logo"
-            className="h-[50px] w-[125px] object-scale-down"
+            className="h-[50px] w-[125px] object-scale-down rounded-full"
             loading="lazy"
           />
         </Link>
