@@ -9,6 +9,7 @@ const CallToAction = () => {
       <h2 className="w-full text-4xl font-bold text-center capitalize outline-black">
         Experience the Selection for Yourself!
       </h2>
+      {/* TODO update css for mobile breakpoints  */}
       <div className="grid w-full grid-cols-2 gap-16">
         <div className="flex flex-col items-center justify-center w-full h-full gap-4 ml-4">
           <p>
