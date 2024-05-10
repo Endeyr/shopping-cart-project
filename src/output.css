@@ -812,6 +812,11 @@ body {
   height: 400px;
 }
 
+.size-\[500px\] {
+  width: 500px;
+  height: 500px;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -872,6 +877,14 @@ body {
   height: 1px;
 }
 
+.h-\[250px\] {
+  height: 250px;
+}
+
+.h-\[360px\] {
+  height: 360px;
+}
+
 .min-h-\[100dvh\] {
   min-height: 100dvh;
 }
@@ -918,6 +931,14 @@ body {
 
 .w-full {
   width: 100%;
+}
+
+.w-\[500px\] {
+  width: 500px;
+}
+
+.w-\[640px\] {
+  width: 640px;
 }
 
 .min-w-\[8rem\] {
