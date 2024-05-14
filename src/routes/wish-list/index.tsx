@@ -11,7 +11,7 @@ const WishListPage = () => {
     const subtotal = item.price * item.quantity;
     totalPrice += subtotal;
   });
-
+  // TODO if wish list empty check local storage for wish list object
   const handleDelete = (id: number) => {
     const deletedItemWishList = wishList.filter((item) => item.id !== id);
     setWishList(deletedItemWishList);

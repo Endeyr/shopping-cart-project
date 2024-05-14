@@ -12,7 +12,7 @@ const CartPage = () => {
     const subtotal = item.price * item.quantity;
     totalPrice += subtotal;
   });
-
+  // TODO if cart empty check local storage for cart object
   const handleDelete = (id: number) => {
     const deletedItemCart = cart.filter((item) => item.id !== id);
     setCart(deletedItemCart);

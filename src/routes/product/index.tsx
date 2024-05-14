@@ -80,7 +80,7 @@ const ProductPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-
+  // TODO save cart to local storage
   const handleCartSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formData.quantity <= 0) {
@@ -95,7 +95,7 @@ const ProductPage = () => {
     }
     console.log("Form submitted:", formData);
   };
-
+  // TODO save wish list to local storage
   const handleWishListOnClick = (item: ItemType, itemPrice: number) => {
     const newWishListItem: CartType = {
       ...item,
