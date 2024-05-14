@@ -1,4 +1,5 @@
 import Container from "@/components/container";
+import { Button } from "@/components/ui/button";
 import { OutletContextType } from "@/types/type";
 import { Link, useOutletContext } from "react-router-dom";
 
@@ -35,7 +36,7 @@ const CartPage = () => {
       });
     });
   };
-
+  // TODO style page
   return (
     <Container className="flex-col">
       <h2 className="w-full text-xl font-bold text-center capitalize">Cart</h2>
@@ -69,9 +70,9 @@ const CartPage = () => {
                         +
                       </button>
                     </div>
-                    <button onClick={() => handleDelete(item.id)}>
+                    <Button onClick={() => handleDelete(item.id)}>
                       Delete
-                    </button>
+                    </Button>
                   </div>
                 </div>
                 <div className="flex items-end justify-center">
@@ -87,9 +88,9 @@ const CartPage = () => {
       )}
       <div className="flex justify-end w-full px-2 mx-2">
         <div className="flex gap-4">
-          <div>
+          <Button>
             <Link to={"/checkout"}>Proceed to checkout</Link>
-          </div>
+          </Button>
           <div className="mr-[140px] text-lg font-bold">
             Total: {Number(totalPrice.toFixed(0)).toLocaleString("en-US")}gp
           </div>

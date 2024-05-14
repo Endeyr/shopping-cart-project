@@ -67,6 +67,7 @@ const ProductsPage = () => {
       navigate(`/products/${pageNumber}`);
     }
   };
+  // TODO style page
   return (
     <Container className="grid grid-cols-4">
       <div className="flex flex-col w-full h-full col-span-4 gap-2">

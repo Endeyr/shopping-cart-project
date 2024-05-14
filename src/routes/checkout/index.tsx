@@ -87,6 +87,7 @@ const CheckoutPage = () => {
     }
     console.log(paymentFormData);
   };
+  // TODO style page
   return (
     <Container className="flex-col">
       <div>

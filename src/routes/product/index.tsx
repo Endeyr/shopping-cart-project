@@ -112,7 +112,7 @@ const ProductPage = () => {
       navigate("/wish-list");
     }
   };
-
+  // TODO style page
   return (
     <Container className="flex-col">
       {isLoading ? (

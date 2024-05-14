@@ -30,7 +30,7 @@ const WishListPage = () => {
       console.log("Item with that id not found in wish list.");
     }
   };
-
+  // TODO style page
   return (
     <Container className="flex-col">
       <h2 className="w-full text-xl font-bold text-center capitalize">
