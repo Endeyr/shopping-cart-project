@@ -1,6 +1,8 @@
 import Container from "@/components/container";
+import { Button } from "@/components/ui/button";
+import { OutletContextType } from "@/types/type";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 type AddressType = {
   street: string;
@@ -28,6 +30,7 @@ const initialPaymentFormData = {
 };
 
 const CheckoutPage = () => {
+  const { cart } = useOutletContext<OutletContextType>();
   const [addressFormData, setAddressFormData] = useState<AddressType>(
     initialAddressFormData,
   );
@@ -40,6 +43,12 @@ const CheckoutPage = () => {
   const [paymentFormError, setPaymentFormError] = useState("");
 
   const navigate = useNavigate();
+
+  let totalPrice = 0;
+  cart.forEach((item) => {
+    const subtotal = item.price * item.quantity;
+    totalPrice += subtotal;
+  });
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     setAddressFormData({
@@ -87,199 +96,267 @@ const CheckoutPage = () => {
     }
     console.log(paymentFormData);
   };
-  // TODO style page
   return (
-    <Container className="flex-col">
-      <div>
-        {isAddressSubmitted ? (
-          <>
-            <div>Review Address Info</div>
-            <div>
-              <div>{addressFormData.street}</div>
-              <div>{addressFormData.city}</div>
-              <div>{addressFormData.state}</div>
-              <div>{addressFormData.zip}</div>
-              <button
-                onClick={() => {
-                  setIsAddressSubmitted(false);
-                }}
-              >
-                Edit
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <h2>Address</h2>
-            <form onSubmit={handleAddressSubmit}>
-              {addressFormError && (
-                <div className="text-destructive">
-                  Error: {addressFormError}
+    <Container className="flex-col md:space-y-8">
+      <div className="flex flex-col items-center justify-center w-full gap-2">
+        <div>
+          <span className="font-bold">Total: </span>
+          {Number(totalPrice.toFixed(0)).toLocaleString("en-US")}gp
+        </div>
+        <div className="flex flex-col items-center justify-center w-full gap-2">
+          {isAddressSubmitted ? (
+            <>
+              <div className="font-bold text-center">Review Address Info</div>
+              <div className="flex flex-col items-end justify-center w-full gap-2 p-2 shadow-md sm:w-1/2">
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">Street: </span>
+                  {addressFormData.street}
                 </div>
-              )}
-              <div>
-                <label htmlFor="street">Street:</label>
-                <input
-                  id="street"
-                  type="text"
-                  name="street"
-                  placeholder="Street where you live..."
-                  value={addressFormData.street}
-                  onChange={handleAddressChange}
-                  required
-                />
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">City: </span>
+                  {addressFormData.city}
+                </div>
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">State: </span>
+                  {addressFormData.state}
+                </div>
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">Zip Code: </span>
+                  {addressFormData.zip}
+                </div>
+                <Button
+                  onClick={() => {
+                    setIsAddressSubmitted(false);
+                  }}
+                >
+                  Edit
+                </Button>
               </div>
-              <div>
-                <label htmlFor="city">City:</label>
-                <input
-                  id="city"
-                  type="text"
-                  name="city"
-                  placeholder="City where you live..."
-                  value={addressFormData.city}
-                  onChange={handleAddressChange}
-                  required
-                />
+            </>
+          ) : (
+            <>
+              <h2 className="font-bold text-center">Address</h2>
+              <form
+                className="flex flex-col items-center justify-center w-full gap-2 p-2 shadow-md sm:w-1/2"
+                onSubmit={handleAddressSubmit}
+              >
+                {addressFormError && (
+                  <div className="text-destructive">
+                    Error: {addressFormError}
+                  </div>
+                )}
+                <label
+                  htmlFor="street"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">Street:</span>
+                  <input
+                    id="street"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="text"
+                    name="street"
+                    placeholder="Street where you live..."
+                    value={addressFormData.street}
+                    onChange={handleAddressChange}
+                    required
+                  />
+                </label>
+                <label
+                  htmlFor="city"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">City:</span>
+                  <input
+                    id="city"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="text"
+                    name="city"
+                    placeholder="City where you live..."
+                    value={addressFormData.city}
+                    onChange={handleAddressChange}
+                    required
+                  />
+                </label>
+                <label
+                  htmlFor="state"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">State:</span>
+                  <input
+                    id="state"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="text"
+                    name="state"
+                    placeholder="State where you live..."
+                    value={addressFormData.state}
+                    onChange={handleAddressChange}
+                    required
+                  />
+                </label>
+                <label
+                  htmlFor="zip"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">Zip Code:</span>
+                  <input
+                    id="zip"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="text"
+                    name="zip"
+                    placeholder="Zip Code where you live..."
+                    value={addressFormData.zip}
+                    onChange={handleAddressChange}
+                    required
+                  />
+                </label>
+                <div className="flex items-center justify-end w-full">
+                  <Button type="submit">Submit</Button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+        {/* Payment Info */}
+        <div className="flex flex-col items-center justify-center w-full gap-2">
+          {isPaymentSubmitted ? (
+            <>
+              <div className="font-bold text-center">Review Payment Info</div>
+              <div className="flex flex-col items-end justify-center w-full gap-2 p-2 shadow-md sm:w-1/2">
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">Card Number: </span>
+                  {paymentFormData.cardNumber}
+                </div>
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">Card Name: </span>
+                  {paymentFormData.cardName}
+                </div>
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">Exp Month: </span>
+                  {paymentFormData.expirationMonth}
+                </div>
+                <div className="flex flex-col justify-between w-full gap-1 lg:flex-row">
+                  <span className="font-bold">Exp Year: </span>
+                  {paymentFormData.expirationYear}
+                </div>
+                <Button
+                  onClick={() => {
+                    setIsPaymentSubmitted(false);
+                  }}
+                >
+                  Edit
+                </Button>
               </div>
-              <div>
-                <label htmlFor="state">State:</label>
-                <input
-                  id="state"
-                  type="text"
-                  name="state"
-                  placeholder="State where you live..."
-                  value={addressFormData.state}
-                  onChange={handleAddressChange}
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="zip">Zip Code:</label>
-                <input
-                  id="zip"
-                  type="text"
-                  name="zip"
-                  placeholder="Zip Code where you live..."
-                  value={addressFormData.zip}
-                  onChange={handleAddressChange}
-                  required
-                />
-              </div>
-              <div>
-                <button type="submit">Submit</button>
-              </div>
-            </form>
+            </>
+          ) : (
+            <>
+              <h2 className="font-bold text-center">Payment</h2>
+              <form
+                onSubmit={handlePaymentSubmit}
+                className="flex flex-col items-center justify-center w-full gap-2 p-2 shadow-md sm:w-1/2"
+              >
+                {paymentFormError && (
+                  <div className="text-destructive">
+                    Error: {paymentFormError}
+                  </div>
+                )}
+
+                <label
+                  htmlFor="cardName"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">Name:</span>
+                  <input
+                    id="cardName"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="text"
+                    name="cardName"
+                    placeholder="Name on the card..."
+                    value={paymentFormData.cardName}
+                    onChange={handlePaymentChange}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+                <label
+                  htmlFor="cardNumber"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">Number:</span>
+                  <input
+                    id="cardNumber"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="tel"
+                    name="cardNumber"
+                    placeholder="xxxx xxxx xxxx xxxx"
+                    inputMode="numeric"
+                    pattern="[0-9\s]{13,19}"
+                    maxLength={19}
+                    value={paymentFormData.cardNumber}
+                    onChange={handlePaymentChange}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+                <label
+                  htmlFor="expirationMonth"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">Exp Month:</span>
+                  <input
+                    id="expirationMonth"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="number"
+                    name="expirationMonth"
+                    placeholder="01"
+                    maxLength={2}
+                    min="1"
+                    max="12"
+                    value={paymentFormData.expirationMonth}
+                    onChange={handlePaymentChange}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+                <label
+                  htmlFor="expirationYear"
+                  className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                >
+                  <span className="font-bold">Exp Year:</span>
+                  <input
+                    id="expirationYear"
+                    className="w-full px-1 lg:w-2/3 dark:text-black"
+                    type="number"
+                    name="expirationYear"
+                    placeholder="2024"
+                    maxLength={4}
+                    min="2024"
+                    max="2050"
+                    value={paymentFormData.expirationYear}
+                    onChange={handlePaymentChange}
+                    autoComplete="off"
+                    required
+                  />
+                </label>
+                <div className="flex items-center justify-end w-full">
+                  <Button type="submit">Submit</Button>
+                </div>
+              </form>
+            </>
+          )}
+        </div>
+        {isAddressSubmitted && isPaymentSubmitted && (
+          <>
+            <Button
+              onClick={() => {
+                console.log("Confirmed and submitted to backend");
+                navigate("/confirmation");
+              }}
+            >
+              Confirm
+            </Button>
           </>
         )}
       </div>
-      {/* Payment Info */}
-      <div>
-        {isPaymentSubmitted ? (
-          <>
-            <div>Review Payment Info</div>
-            <div>
-              <div>{paymentFormData.cardNumber}</div>
-              <div>{paymentFormData.cardName}</div>
-              <div>{paymentFormData.expirationMonth}</div>
-              <div>{paymentFormData.expirationYear}</div>
-              <button
-                onClick={() => {
-                  setIsPaymentSubmitted(false);
-                }}
-              >
-                Edit
-              </button>
-            </div>
-          </>
-        ) : (
-          <>
-            <h2>Payment</h2>
-            <form onSubmit={handlePaymentSubmit}>
-              {paymentFormError && (
-                <div className="text-destructive">
-                  Error: {paymentFormError}
-                </div>
-              )}
-              <div>
-                <label htmlFor="cardName">Name:</label>
-                <input
-                  id="cardName"
-                  type="text"
-                  name="cardName"
-                  placeholder="Name on the card..."
-                  value={paymentFormData.cardName}
-                  onChange={handlePaymentChange}
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="cardNumber">Number:</label>
-                <input
-                  id="cardNumber"
-                  type="tel"
-                  name="cardNumber"
-                  placeholder="xxxx xxxx xxxx xxxx"
-                  inputMode="numeric"
-                  pattern="[0-9\s]{13,19}"
-                  maxLength={19}
-                  value={paymentFormData.cardNumber}
-                  onChange={handlePaymentChange}
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="expirationMonth">Expiration Month:</label>
-                <input
-                  id="expirationMonth"
-                  type="number"
-                  name="expirationMonth"
-                  placeholder="01"
-                  maxLength={2}
-                  min="1"
-                  max="12"
-                  value={paymentFormData.expirationMonth}
-                  onChange={handlePaymentChange}
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="expirationYear">Expiration Year:</label>
-                <input
-                  id="expirationYear"
-                  type="number"
-                  name="expirationYear"
-                  placeholder="2024"
-                  maxLength={4}
-                  min="2024"
-                  max="2050"
-                  value={paymentFormData.expirationYear}
-                  onChange={handlePaymentChange}
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              <div>
-                <button type="submit">Submit</button>
-              </div>
-            </form>
-          </>
-        )}
-      </div>
-      {isAddressSubmitted && isPaymentSubmitted && (
-        <>
-          <button
-            onClick={() => {
-              console.log("Confirmed and submitted to backend");
-              navigate("/confirmation");
-            }}
-          >
-            Confirm
-          </button>
-        </>
-      )}
     </Container>
   );
 };
