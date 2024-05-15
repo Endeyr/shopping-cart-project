@@ -786,6 +786,36 @@ body {
   height: 400px;
 }
 
+.size-\[250px\] {
+  width: 250px;
+  height: 250px;
+}
+
+.size-\[200px\] {
+  width: 200px;
+  height: 200px;
+}
+
+.size-\[150px\] {
+  width: 150px;
+  height: 150px;
+}
+
+.size-\[25dvh\] {
+  width: 25dvh;
+  height: 25dvh;
+}
+
+.size-\[20dvh\] {
+  width: 20dvh;
+  height: 20dvh;
+}
+
+.size-\[10dvh\] {
+  width: 10dvh;
+  height: 10dvh;
+}
+
 .h-10 {
   height: 2.5rem;
 }
@@ -900,6 +930,10 @@ body {
 
 .w-full {
   width: 100%;
+}
+
+.w-3\/4 {
+  width: 75%;
 }
 
 .min-w-\[8rem\] {
@@ -1050,6 +1084,12 @@ body {
   margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
 }
 
+.space-y-8 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+}
+
 .overflow-hidden {
   overflow: hidden;
 }
@@ -1169,6 +1209,21 @@ body {
 
 .fill-current {
   fill: currentColor;
+}
+
+.object-contain {
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.object-cover {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.object-fill {
+  -o-object-fit: fill;
+     object-fit: fill;
 }
 
 .object-scale-down {
@@ -1700,6 +1755,12 @@ body {
     --tw-space-y-reverse: 0;
     margin-top: calc(2rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(2rem * var(--tw-space-y-reverse));
+  }
+
+  .md\:space-y-10 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(2.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(2.5rem * var(--tw-space-y-reverse));
   }
 
   .md\:p-5 {
