@@ -80,7 +80,6 @@ const ProductPage = () => {
       [e.target.name]: e.target.value,
     });
   };
-  // TODO save cart to local storage
   const handleCartSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formData.quantity <= 0) {
@@ -91,11 +90,11 @@ const ProductPage = () => {
     } else {
       const newCart: CartType[] = [...cart, formData];
       setCart(newCart);
+      localStorage.setItem("cart", JSON.stringify(newCart));
       navigate("/cart");
     }
     console.log("Form submitted:", formData);
   };
-  // TODO save wish list to local storage
   const handleWishListOnClick = (item: ItemType, itemPrice: number) => {
     const newWishListItem: CartType = {
       ...item,
@@ -109,6 +108,7 @@ const ProductPage = () => {
     } else {
       const newWishList: CartType[] = [...wishList, newWishListItem];
       setWishList(newWishList);
+      localStorage.setItem("wishList", JSON.stringify(newWishList));
       navigate("/wish-list");
     }
   };

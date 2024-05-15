@@ -40,7 +40,30 @@ export default function Root() {
       isMounted = false;
     };
   }, []);
-
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted && wishList.length === 0) {
+      const storedWishList = localStorage.getItem("wishList");
+      if (storedWishList) {
+        setWishList(JSON.parse(storedWishList));
+      }
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [wishList.length]);
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted && cart.length === 0) {
+      const storedCart = localStorage.getItem("cart");
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      }
+    }
+    return () => {
+      isMounted = false;
+    };
+  }, [cart.length]);
   return (
     <>
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
