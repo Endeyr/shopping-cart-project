@@ -4,6 +4,7 @@ import { fetchPriceById } from "@/services/api/index";
 import { CartType, ItemType, OutletContextType } from "@/types/type";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import { useCartCount } from "../../providers/cart-count-provider/context/useCartCount";
 
 const initialFormData: CartType = {
   examine: "",
@@ -26,6 +27,7 @@ const ProductPage = () => {
     wishList,
     setWishList,
   } = useOutletContext<OutletContextType>();
+  const { cartCount, setCartCount } = useCartCount();
   const [itemPrice, setItemPrice] = useState(0);
   const [formData, setFormData] = useState<CartType>(initialFormData);
   const [isPriceLoading, setIsPriceLoading] = useState(true);
@@ -89,14 +91,16 @@ const ProductPage = () => {
       throw new Error("Unable to add 0 quantity to cart.");
     }
     if (cart.some((existingItem) => existingItem.id === formData.id)) {
-      console.log("item already in cart");
+      alert("item already in cart");
     } else {
       const newCart: CartType[] = [...cart, formData];
       setCart(newCart);
       localStorage.setItem("cart", JSON.stringify(newCart));
+      if (newCart.length !== cartCount) {
+        setCartCount(newCart.length);
+      }
       navigate("/cart");
     }
-    console.log("Form submitted:", formData);
   };
   const handleWishListOnClick = (item: ItemType, itemPrice: number) => {
     const newWishListItem: CartType = {
@@ -107,7 +111,7 @@ const ProductPage = () => {
     if (
       wishList.some((existingItem) => existingItem.id === newWishListItem.id)
     ) {
-      console.log("item already in wish list");
+      alert("item already in wish list");
     } else {
       const newWishList: CartType[] = [...wishList, newWishListItem];
       setWishList(newWishList);

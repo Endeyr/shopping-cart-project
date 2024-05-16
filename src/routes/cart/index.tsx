@@ -1,11 +1,13 @@
 import Container from "@/components/container";
 import { Button } from "@/components/ui/button";
+import { useCartCount } from "@/providers/cart-count-provider/context/useCartCount";
 import { OutletContextType } from "@/types/type";
 import { Link, useOutletContext } from "react-router-dom";
 
 const CartPage = () => {
   const { isLoading, error, cart, setCart } =
     useOutletContext<OutletContextType>();
+  const { cartCount, setCartCount } = useCartCount();
   let totalPrice = 0;
   cart.forEach((item) => {
     const subtotal = item.price * item.quantity;
@@ -15,6 +17,9 @@ const CartPage = () => {
     const deletedItemCart = cart.filter((item) => item.id !== id);
     setCart(deletedItemCart);
     localStorage.setItem("cart", JSON.stringify(deletedItemCart));
+    if (deletedItemCart.length !== cartCount) {
+      setCartCount(deletedItemCart.length);
+    }
   };
   const handleQtyChange = (id: number, change: number) => {
     setCart((prevCart) => {
