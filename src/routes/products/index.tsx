@@ -67,7 +67,6 @@ const ProductsPage = () => {
       navigate(`/products/${pageNumber}`);
     }
   };
-  // TODO style page
   return (
     <Container className="grid grid-cols-4">
       <div className="flex flex-col w-full h-full col-span-4 gap-2">
@@ -87,24 +86,24 @@ const ProductsPage = () => {
           <>
             <div className="grid w-full grid-cols-1 col-span-4 md:grid-cols-2 lg:grid-cols-4">
               {paginatedItems.map((item) => (
-                <div key={item.id} className="border min-h-[25dvh] p-2">
+                <div key={item.id} className=" min-h-[25dvh] p-2 m-2 shadow-md">
                   <Link
                     to={`/product/${item.id}`}
                     className="flex flex-col justify-between w-full h-full"
                   >
-                    <div>
-                      <span className="font-bold">Name: </span>
-                      {item.name}
-                    </div>
-                    <div className="flex items-center justify-center w-full">
-                      <img
-                        src={item.icon}
-                        alt={item.name}
-                        width={25}
-                        height={25}
-                        className="object-scale-down"
-                        loading="lazy"
-                      />
+                    <div className="flex items-center w-full h-full justify-evenly">
+                      <div>
+                        <span className="font-bold">Name: </span>
+                        {item.name}
+                      </div>
+                      <div className="flex items-center justify-center w-full">
+                        <img
+                          src={item.icon}
+                          alt={item.name}
+                          className="size-[5dvh] object-contain"
+                          loading="lazy"
+                        />
+                      </div>
                     </div>
                     <p>
                       <span className="font-bold">Description: </span>
