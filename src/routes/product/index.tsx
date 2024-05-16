@@ -145,7 +145,7 @@ const ProductPage = () => {
                   <div className="flex flex-col items-end w-full h-full justify-evenly">
                     {!isPriceLoading && (
                       <div className="flex items-center justify-end w-full p-2">
-                        <span className="font-bold">Price: </span>
+                        <span className="mr-2 font-bold">Price: </span>
                         {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp
                       </div>
                     )}
@@ -158,7 +158,7 @@ const ProductPage = () => {
                           htmlFor="quantity"
                           className="flex flex-col justify-between w-full gap-1 lg:flex-row"
                         >
-                          <span className="font-bold">Quantity</span>
+                          <span className="font-bold">Quantity: </span>
                           <input
                             id="quantity"
                             className="w-full px-1 lg:w-2/3 dark:text-black"

@@ -682,6 +682,10 @@ body {
   grid-column-start: 4;
 }
 
+.m-2 {
+  margin: 0.5rem;
+}
+
 .-mx-1 {
   margin-left: -0.25rem;
   margin-right: -0.25rem;
@@ -814,6 +818,26 @@ body {
 .size-\[10dvh\] {
   width: 10dvh;
   height: 10dvh;
+}
+
+.size-\[25px\] {
+  width: 25px;
+  height: 25px;
+}
+
+.size-\[50px\] {
+  width: 50px;
+  height: 50px;
+}
+
+.size-\[75px\] {
+  width: 75px;
+  height: 75px;
+}
+
+.size-\[5dvh\] {
+  width: 5dvh;
+  height: 5dvh;
 }
 
 .h-10 {
