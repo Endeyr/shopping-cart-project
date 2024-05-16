@@ -13,7 +13,7 @@ const Identity = () => {
             loading="lazy"
           />
         </div>
-        <div className="flex flex-col items-center justify-center col-span-1 col-start-2 gap-4">
+        <div className="flex flex-col items-center justify-center col-span-1 col-start-2 gap-4 mb-2">
           <h2 className="w-full my-2 text-lg font-bold text-center capitalize">
             Chancellor Hassan&apos;s Bazaar
           </h2>
