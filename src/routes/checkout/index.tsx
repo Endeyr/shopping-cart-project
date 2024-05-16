@@ -30,7 +30,7 @@ const initialPaymentFormData = {
 };
 
 const CheckoutPage = () => {
-  const { cart } = useOutletContext<OutletContextType>();
+  const { cart, setCart } = useOutletContext<OutletContextType>();
   const [addressFormData, setAddressFormData] = useState<AddressType>(
     initialAddressFormData,
   );
@@ -349,6 +349,8 @@ const CheckoutPage = () => {
             <Button
               onClick={() => {
                 console.log("Confirmed and submitted to backend");
+                setCart([]);
+                localStorage.removeItem("cart");
                 navigate("/confirmation");
               }}
             >
