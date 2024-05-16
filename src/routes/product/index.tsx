@@ -1,4 +1,5 @@
 import Container from "@/components/container";
+import { Button } from "@/components/ui/button";
 import { fetchPriceById } from "@/services/api/index";
 import { CartType, ItemType, OutletContextType } from "@/types/type";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -27,6 +28,7 @@ const ProductPage = () => {
   } = useOutletContext<OutletContextType>();
   const [itemPrice, setItemPrice] = useState(0);
   const [formData, setFormData] = useState<CartType>(initialFormData);
+  const [isPriceLoading, setIsPriceLoading] = useState(true);
   const idObj = useParams<{ id: string }>();
   const id = idObj.id;
   const navigate = useNavigate();
@@ -56,6 +58,7 @@ const ProductPage = () => {
           const price = await fetchPriceById(id, isMounted);
           if (price !== undefined) {
             setItemPrice(price);
+            setIsPriceLoading(false);
           }
         }
       } catch (error: unknown) {
@@ -112,9 +115,8 @@ const ProductPage = () => {
       navigate("/wish-list");
     }
   };
-  // TODO style page
   return (
-    <Container className="flex-col">
+    <Container className="flex-col space-y-6 md:space-y-8">
       {isLoading ? (
         <div className="flex flex-col items-center justify-center h-48 gap-4">
           <h2 className="text-2xl">Loading...</h2>
@@ -126,40 +128,58 @@ const ProductPage = () => {
         <>
           {item && (
             <>
-              <h2>{item.name}</h2>
-              <div className="grid w-full grid-cols-3">
-                <div className="h-[400px] border">
-                  {/* TODO optimize image */}
-                  <img src={item.icon} />
+              <h2 className="text-xl font-bold">{item.name}</h2>
+              <div className="grid w-full grid-cols-1 lg:grid-cols-3 h-full lg:h-[30dvh] shadow-md">
+                <div className="flex items-center justify-center w-full h-full">
+                  <img
+                    className="size-[10dvh] object-contain"
+                    src={item.icon}
+                    alt={item.name}
+                    loading="lazy"
+                  />
                 </div>
-                <div className="h-[400px] border">{item.examine}</div>
+                <div className="flex flex-col items-center h-full justify-evenly">
+                  {item.examine}
+                </div>
                 {itemPrice > 0 ? (
-                  // TODO show a loader or spinner while price is loading
-                  <div className="h-[400px] border">
-                    <div>
-                      Price:
-                      {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp
-                    </div>
-                    <div className="flex flex-col">
-                      <form onSubmit={handleCartSubmit}>
-                        <label htmlFor="quantity">Quantity</label>
-                        <input
-                          id="quantity"
-                          name="quantity"
-                          type="number"
-                          value={formData?.quantity}
-                          onChange={handleCartChange}
-                          min="1"
-                          placeholder="Pick a number..."
-                        />
-                        <button type="submit">Add to Cart</button>
+                  <div className="flex flex-col items-end w-full h-full justify-evenly">
+                    {!isPriceLoading && (
+                      <div className="flex items-center justify-end w-full p-2">
+                        <span className="font-bold">Price: </span>
+                        {Number(itemPrice.toFixed(0)).toLocaleString("en-US")}gp
+                      </div>
+                    )}
+                    <div className="flex flex-col items-center w-full">
+                      <form
+                        onSubmit={handleCartSubmit}
+                        className="flex flex-col items-center justify-center w-full gap-2 p-2"
+                      >
+                        <label
+                          htmlFor="quantity"
+                          className="flex flex-col justify-between w-full gap-1 lg:flex-row"
+                        >
+                          <span className="font-bold">Quantity</span>
+                          <input
+                            id="quantity"
+                            className="w-full px-1 lg:w-2/3 dark:text-black"
+                            name="quantity"
+                            type="number"
+                            value={formData?.quantity}
+                            onChange={handleCartChange}
+                            min="1"
+                            placeholder="Pick a number..."
+                          />
+                        </label>
+                        <div className="flex items-center justify-end w-full">
+                          <Button type="submit">Add to Cart</Button>
+                        </div>
                       </form>
-                      <div>
-                        <button
+                      <div className="flex items-center justify-end w-full p-2">
+                        <Button
                           onClick={() => handleWishListOnClick(item, itemPrice)}
                         >
                           Add to Wish List
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -167,8 +187,6 @@ const ProductPage = () => {
                   <div className="h-[400px] border">Price Unavailable</div>
                 )}
               </div>
-              {/* Reviews / Comments */}
-              <div>Comments / Reviews</div>
             </>
           )}
         </>
