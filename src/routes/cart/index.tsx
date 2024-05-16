@@ -122,9 +122,11 @@ const CartPage = () => {
             {Number(totalPrice.toFixed(0)).toLocaleString("en-US")}gp
           </div>
         </div>
-        <Button>
-          <Link to={"/checkout"}>Proceed to checkout</Link>
-        </Button>
+        {cart.length > 0 && (
+          <Button>
+            <Link to={"/checkout"}>Proceed to checkout</Link>
+          </Button>
+        )}
       </div>
     </Container>
   );
